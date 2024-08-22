@@ -182,6 +182,7 @@ struct ContentView: View {
                 .tabItem {
                     // How to display the button for the view, it's the same as a label for a button
                     Label("Red", systemImage: "star.fill")
+                    
                 }
                 // TabView tag
                 // When selectedTab is "red" it will go to this one
@@ -191,6 +192,7 @@ struct ContentView: View {
             GreenView()
                 .tabItem {
                     Label("Green", systemImage: "star.fill")
+                    
                 }
                 .tag("green")
             
@@ -198,6 +200,7 @@ struct ContentView: View {
             YellowView()
                 .tabItem {
                     Label("Yellow", systemImage: "star.fill")
+                    
                 }
                 .tag("yellow")
             
