@@ -15,74 +15,35 @@ struct Subject: Identifiable, Hashable {
     
 }
 
-/* USE THIS FOR TIME DURATION
- // get ticks from start-end)/tickseperation then title from return
- func getTimeFromTicks(_ ticks: Int) -> (hours: Int, minutes: Int) {
-     // Returns the greater of two values given
-     let normalTicks = max(ticks, 1)
-     
-     var hours: Int = 0
-     var minutes: Int = 0
-     
-     switch normalTicks {
-     case 1 ... 4:
-         // 5 minute intervals
-         minutes = normalTicks * 5
-         
-     case 5:
-         minutes = 30
-         
-     case 6 ... 7:
-         // 30 minite intervals on top of 30 minutes
-         minutes = ((normalTicks - 5) * 15) + 30
-         
-     case 8 ... 11:
-         // 1 hour intervals on top of 1 hour
-         minutes = ((normalTicks - 7) * 30) + 60
-         
-     case 12:
-         minutes = 240
-         
-     default:
-         // Will display as forever
-         minutes = 300
-         
-     }
-     
-     // Hours from minutes
-     hours = minutes / 60
-     
-     // Get remainder from minutes / 60
-     minutes %= 60
-     
-     return (hours, minutes)
-     
- }
- */
-
 // Everything gets real funky at the bottom the circle
-//I dunno why but it doesn't really matter that much ig
+// I dunno why but it doesn't really matter that much ig
+// There is also a slight rounding error
+// 2 deg by the end, or 1 at the top
+// Will fix later
 struct TimeDialView: View {
     init() {
-        // Default to the first subject in the array
         _selectedSubject = State(initialValue: subjects[0])
         
         self.circleStartingPosition = 60
+        
+        let realEndPosition: Double = 180
          
         let calculatedStartAngle = circleStartingPosition
-        let calculatedEndAngle = circleStartingPosition + 180
+        let calculatedEndAngle = circleStartingPosition + (realEndPosition - circleStartingPosition)
         
-        // Calculate start and end progress based on normalizedPosition
         let progressPerDegree = 1.0 / 360.0
-        let calculatedEndProgress = Double(circleStartingPosition + 180) * progressPerDegree
+        let calculatedEndProgress = calculatedEndAngle * progressPerDegree
         let calculatedStartProgress = Double((circleStartingPosition).truncatingRemainder(dividingBy: 360)) * progressPerDegree
         
-        // Set the state variables with the calculated angles and progress
         _startAngle = State(initialValue: calculatedStartAngle)
         _startProgress = State(initialValue: calculatedStartProgress)
         
         _endAngle = State(initialValue: calculatedEndAngle)
         _endProgress = State(initialValue: calculatedEndProgress)
+        
+        self.timeTicksNeeded = 14
+        
+        self.tickInterval = Double((360 - Double(2 * Int(circleStartingPosition))) / Double(timeTicksNeeded))
         
     }
     
@@ -90,13 +51,16 @@ struct TimeDialView: View {
     
     var circleStartingPosition: Double
         
-    @State var startAngle: Double// = 0
-    @State var startProgress: CGFloat// = 0
+    @State var startAngle: Double
+    @State var startProgress: CGFloat
     
-    @State var endAngle: Double// = 90
-    @State var endProgress: CGFloat// = 0.25
+    @State var endAngle: Double
+    @State var endProgress: CGFloat
     
-    let tickInterval = 10
+    var timeTicksNeeded: Int
+    var tickInterval: Double
+    
+    let tickBufferSpace = 0
     
     var subjects: [Subject] = [
         Subject(name: "English"),
@@ -105,9 +69,18 @@ struct TimeDialView: View {
         Subject(name: "Socials", icon: "person.2.wave.2", colour: .brown),
         Subject(name: "Astronomy", icon: "globe.desk", colour: .purple),
         Subject(name: "Health", icon: "heart", colour: .pink)
+        
     ]
     
     @State private var selectedSubject: Subject
+    
+    func roundToNearestMultiple(of interval: Double, startingAt base: Int, for number: Int) -> Double {
+        let offsetNumber = number - base
+        let roundedOffset = Double(round(Double(offsetNumber) / interval)) * interval
+        
+        return (roundedOffset + Double(base))
+        
+    }
     
     func onDrag(value: DragGesture.Value, isStartSlider: Bool = false, buttonRadius: CGFloat = 15) {
         let vector = CGVector(dx: value.location.x, dy: value.location.y)
@@ -128,7 +101,8 @@ struct TimeDialView: View {
             self.startProgress = progress
             
         } else {
-            angle = min(max(angle, (startAngle + Double(tickInterval * 2))), 300)
+            angle = min(max(angle, (startAngle + Double(tickInterval * Double(tickBufferSpace + 1)))), (360 - circleStartingPosition))
+            
             progress = angle / 360
             
             self.endAngle = angle
@@ -137,76 +111,110 @@ struct TimeDialView: View {
         }
     }
     
-    func getTime(angle: Double) -> Date {
-        // A bigger denominator makes a smaller range in time
-        let progress = angle / 40
+    func getTicksFromAngles(_ startAngle: Double, _ endAngle: Double) -> Int {
+        let diffirence = endAngle - startAngle
         
-        let hours = Int(progress)
-        // 60 / 12 == 5 minute intervals
-        let remainder = (progress.truncatingRemainder(dividingBy: 1) * 12).rounded()
+        let diffirenceWithBuffer = diffirence - Double(tickInterval * Double(tickBufferSpace))
         
-        var minutes = remainder * 5
-        minutes = minutes > 55 ? 55 : minutes
+        let ticks = diffirenceWithBuffer / Double(tickInterval)
         
-        let formatter = DateFormatter()
-        formatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
-        
-        let calendar = Calendar.current
-        let components = calendar.dateComponents([.month, .day, .year], from: Date())
-        
-        let rawDay = (components.day ?? 0)
-        var day: Int = 0
-        
-        if angle == endAngle {
-            day = rawDay + 1
-            
-        } else {
-            day = (startAngle > endAngle) ? rawDay : rawDay + 1
-           
-        }
-        
-        if let date = formatter.date(from: "\(components.year ?? 0)-\(components.month ?? 0)-\(day) \(hours == 24 ? 0 : hours):\(Int(minutes)):00") {
-            return date
-        }
-        
-        return .init()
+        return Int(ticks)
         
     }
     
-    func getDuration() -> (Int, Int) {
-        let calendar = Calendar.current
+    func getTimeFromTicks(_ ticks: Int) -> (hours: Int, minutes: Int) {
+        // Returns the greater of two values given fyi
+        let normalTicks = max(ticks, 1)
         
-        let result = calendar.dateComponents([.hour, .minute], from: getTime(angle: startAngle), to: getTime(angle: endAngle))
+        var hours: Int = 0
+        var minutes: Int = 0
         
-        return (result.hour ?? 0, result.minute ?? 00)
+        switch normalTicks {
+        case 1 ... 4:
+            minutes = normalTicks * 5
+            
+        case 5:
+            minutes = 30
+            
+        case 6 ... 7:
+            minutes = ((normalTicks - 5) * 15) + 30
+            
+        case 8 ... 11:
+            minutes = ((normalTicks - 7) * 30) + 60
+            
+        case 12 ... 13:
+            minutes = (normalTicks - 8) * 60
+            
+        default:
+            minutes = 600
+            
+        }
+        
+        hours = minutes / 60
+        
+        minutes %= 60
+        
+        return (hours, minutes)
+        
+    }
+    
+    func formatTime(_ input: (hours: Int, minutes: Int)) -> String {
+        var timeString = ""
+        
+        if input.hours > 0 {
+            timeString += input.hours == 1 ? "1hr" : "\(input.hours)hrs"
+            
+        }
+            
+        if input.minutes > 0 {
+            if !timeString.isEmpty {
+                timeString += " "
+                
+            }
+            
+            timeString += "\(input.minutes)min"
+            
+        }
+        
+        if input.hours == 10 {
+            timeString = "Forever"
+            
+        }
+        
+        return timeString
         
     }
     
     var body: some View {
-        //Text("Hello, TimeDial!")
-        
         GeometryReader { proxy in
             let width = proxy.size.width
             
             VStack {
-                Button {
-                    print(startAngle)
-                    print(startProgress)
-                    print("")
-                    print(endAngle)
-                    print(endProgress)
-                    
-                } label: {
-                    Label("Debug", systemImage: "book.pages")
-                        .padding(.vertical, 5)
-                        .padding(.horizontal, 10)
-                        .background(.black.opacity(0.05), in: Capsule())
-                    
-                }
-                
-                Spacer()
-                
                 ZStack {
+                    VStack {
+                        Button {
+                            print("Start")
+                            print(startAngle)
+                            print(startProgress)
+                            print("")
+                            print("End")
+                            print(endAngle)
+                            print(endProgress)
+                            print("")
+                            print("Ticks")
+                            print(getTicksFromAngles(startAngle, endAngle))
+                            
+                        } label: {
+                            Label("Debug", systemImage: "book.pages")
+                                .padding(.vertical, 5)
+                                .padding(.horizontal, 10)
+                                .background(.black.opacity(0.05), in: Capsule())
+                            
+                        }
+                        
+                        Spacer()
+                    }
+                    
                     Circle()
                         .stroke(Color(.systemGray5), lineWidth: 60)
                     
@@ -218,21 +226,20 @@ struct TimeDialView: View {
                         .rotationEffect(.init(degrees: 90))
                         .rotationEffect(.init(degrees: reverseRotation))
                     
-                    ForEach(1...60, id: \.self) { index in
-                        let tickRotation: Double = (Double(index * tickInterval) + Double(startAngle)) > endAngle ? endAngle : Double(index * tickInterval) + Double(startAngle)
+                    ForEach(1...timeTicksNeeded + 2, id: \.self) { index in
+                        let tickRotation: Double = (Double(Double(index) * Double(tickInterval)) + Double(startAngle)) > endAngle ? endAngle : Double(Double(index) * Double(tickInterval)) + Double(startAngle)
                         
                         Capsule()
-                            .frame(width: 3, height: index.isMultiple(of: 6) ? 30 : 25)
+                            .frame(width: 3.5, height: (index + 1).isMultiple(of: 2) ? 30 : 25)
                             .foregroundStyle(.background)
                             .offset(y: width / 2)
                             .rotationEffect(.init(degrees: tickRotation))
-                        // One solid tick every hour however that goes in the end
-                            .opacity(index.isMultiple(of: 6) ? 1 : 0.5)
+                            .opacity((index + 1).isMultiple(of: 2) ? 1 : 0.5)
+                        
                     }
                     
                     //Image(systemName: "person.fill")
                     Text("Now")
-                        //.font(.caption)
                         .bold()
                         .foregroundStyle(.background)
                         .frame(width: 50, height: 50)
@@ -241,18 +248,9 @@ struct TimeDialView: View {
                         .rotationEffect(.init(degrees: -startAngle))
                         .offset(x: width / 2)
                         .rotationEffect(.init(degrees: startAngle))
-                    /*
-                        .gesture(
-                            DragGesture()
-                                .onChanged({ value in
-                                    onDrag(value: value, isStartSlider: true)
-                                })
-                        )
-                     */
                         .rotationEffect(.init(degrees: 90))
                     
                     Image(systemName: selectedSubject.icon)
-                        //.font(.callout)
                         .font(.title2)
                         .bold()
                         .foregroundStyle(.background)
@@ -268,30 +266,37 @@ struct TimeDialView: View {
                                     onDrag(value: value)
                                 })
                                 .onEnded({ value in
-                                    //endAngle = min(max(endAngle, (startAngle + 5)), 300)
-                                    endAngle = round(endAngle / Double(tickInterval)) * Double(tickInterval)
+                                    print(endAngle)
+                                    endAngle = roundToNearestMultiple(of: tickInterval, startingAt: Int(circleStartingPosition), for: Int(endAngle))
+                                    print(endAngle)
                                     
                                     let progressPerDegree = 1.0 / 360.0
                                     endProgress = Double(endAngle) * progressPerDegree
+                                    
                                 })
                         )
                         .rotationEffect(.init(degrees: 90))
                         .sensoryFeedback(.increase, trigger: round(endAngle / Double(tickInterval)) * Double(tickInterval))
                     
                     VStack(spacing: 4) {
-                        /*
-                        Text("Start")
-                            .font(.title)
-                            .padding(.vertical, 8)
-                            .padding(.horizontal, 13)
-                            .background(.black.opacity(0.05), in: Capsule())
-                         */
-                        // Duration only works on an actual device
-                        Text("\(getDuration().0)hr \(getDuration().1)min")
+                        let ticks = getTicksFromAngles(startAngle, endAngle)
+                        let displayText = formatTime(getTimeFromTicks(ticks))
+                        
+                        Text(formatTime(getTimeFromTicks(ticks)))
+                            .animation(.bouncy, value: displayText)
                             .font(.largeTitle)
                             .bold()
                         
-                        // We can make our own menu later
+                        // Doesn't look good here
+                        /*
+                        Text("Start Session")
+                            .font(.title2)
+                            .padding(.vertical, 8)
+                            .padding(.horizontal, 13)
+                            .background(Color(.systemGray5), in: Capsule())
+                         */
+                        
+                        // We can also make our own menu later
                         
                         Menu {
                             ForEach(subjects.reversed()) { subject in
@@ -320,15 +325,14 @@ struct TimeDialView: View {
                             
                         } label: {
                             HStack {
-                                Text(selectedSubject.name)
-                                    .font(.title2)
-                                    //.bold()
+                                // Looks better with spaces in front
+                                Text("  \(selectedSubject.name)")
+                                    .font(.title3)
                                     .foregroundStyle(colorScheme == .light ? .black : .white)
-                                    .animation(.bouncy, value: selectedSubject.name) // Animate text change
+                                    .animation(.bouncy, value: selectedSubject.name)
                                 
                                 Image(systemName: "chevron.up.chevron.down")
                                     .foregroundStyle(colorScheme == .light ? .black : .white)
-                                    //.bold()
                                 
                             }
                         }
@@ -342,10 +346,10 @@ struct TimeDialView: View {
                 }
                 
                 Spacer()
+                
             }
         }
         .frame(width: (screenBounds().width / 1.45), height: (screenBounds().height / 1.5))
-        //.border(.red)
         
     }
 }

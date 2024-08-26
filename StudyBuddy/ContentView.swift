@@ -120,7 +120,7 @@ struct RedView: View {
             // Stuff to control interaction on the sheet (the white thing)
             // This is the available sizes of the sheet (try dragging the top of it up/down)
             //.presentationDetents([.fraction(0.41), .fraction(0.8)])
-            .presentationDetents([.medium, .fraction(0.41), .fraction(0.93)])
+            .presentationDetents([.medium, .fraction(0.40), .fraction(0.93)])
             //.presentationDetents([.fraction(0.8), .fraction(0.41)])
 
             
