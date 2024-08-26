@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		6E0B162F2C79137700C79488 /* TimeDialView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E0B162E2C79137700C79488 /* TimeDialView.swift */; };
+		6E0B16312C79396500C79488 /* ViewExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E0B16302C79396500C79488 /* ViewExtensions.swift */; };
 		6E4A66BE2C265CE90067888E /* StudyBuddyApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E4A66BD2C265CE90067888E /* StudyBuddyApp.swift */; };
 		6E4A66C02C265CE90067888E /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E4A66BF2C265CE90067888E /* ContentView.swift */; };
 		6E4A66C22C265CE90067888E /* Item.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E4A66C12C265CE90067888E /* Item.swift */; };
@@ -35,6 +37,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		6E0B162E2C79137700C79488 /* TimeDialView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeDialView.swift; sourceTree = "<group>"; };
+		6E0B16302C79396500C79488 /* ViewExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewExtensions.swift; sourceTree = "<group>"; };
 		6E4A66BA2C265CE90067888E /* StudyBuddy.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = StudyBuddy.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		6E4A66BD2C265CE90067888E /* StudyBuddyApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StudyBuddyApp.swift; sourceTree = "<group>"; };
 		6E4A66BF2C265CE90067888E /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -97,6 +101,8 @@
 			isa = PBXGroup;
 			children = (
 				6E4A66BD2C265CE90067888E /* StudyBuddyApp.swift */,
+				6E0B16302C79396500C79488 /* ViewExtensions.swift */,
+				6E0B162E2C79137700C79488 /* TimeDialView.swift */,
 				6E4A66BF2C265CE90067888E /* ContentView.swift */,
 				6E4A66C12C265CE90067888E /* Item.swift */,
 				6E4A66C32C265CEB0067888E /* Assets.xcassets */,
@@ -261,7 +267,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				6E4A66C02C265CE90067888E /* ContentView.swift in Sources */,
+				6E0B162F2C79137700C79488 /* TimeDialView.swift in Sources */,
 				6E4A66C22C265CE90067888E /* Item.swift in Sources */,
+				6E0B16312C79396500C79488 /* ViewExtensions.swift in Sources */,
 				6E4A66BE2C265CE90067888E /* StudyBuddyApp.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

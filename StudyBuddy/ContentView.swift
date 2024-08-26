@@ -40,24 +40,26 @@ struct RedView: View {
             // It's a single line if statment that can be used to hold two outputs
             // Like this: [variableName] == [desired state] ? [return thing a] : [return thing b]
             // It defaults to if the variable is true in this case
-            Color(showRed ? .red : .purple)
-                .onTapGesture {
+            //Color(showRed ? .white : .purple)
+                //.onTapGesture {
                     // When the colour is tapped, it will change the colour of the view
-                    showRed.toggle()
+                    //showRed.toggle()
                     
-                }
+                //}
                 // Pushes colour right to the edge
-                .edgesIgnoringSafeArea(.all)
+                //.edgesIgnoringSafeArea(.all)
             
-            Text("RedView Content")
+            //Text("RedView Content")
+            
+            TimeDialView()
             
         }
         .sheet(isPresented: $isSheetPresented) {
             ZStack {
-                Color(.white)
-                    .edgesIgnoringSafeArea(.all)
+                //Color(.white)
+                    //.edgesIgnoringSafeArea(.all)
                 
-                Text("Sheet Content")
+                Text("Sheet Content (RedView)")
                 
                 // Vertical stack, the later the thing is created the lower it goes
                 VStack {
@@ -117,7 +119,10 @@ struct RedView: View {
             }
             // Stuff to control interaction on the sheet (the white thing)
             // This is the available sizes of the sheet (try dragging the top of it up/down)
-            .presentationDetents([.medium, .fraction(0.3)])
+            //.presentationDetents([.fraction(0.41), .fraction(0.8)])
+            .presentationDetents([.medium, .fraction(0.41), .fraction(0.93)])
+            //.presentationDetents([.fraction(0.8), .fraction(0.41)])
+
             
             // Prevents the user from swiping it away fully
             .interactiveDismissDisabled()
@@ -167,7 +172,7 @@ struct YellowView: View {
 struct ContentView: View {
     // Controls the selected tab in the tab view
     // Would otherwise just default to the left most tab
-    @State var selectedTab: String = "green"
+    @State var selectedTab: String = "red"
     
     var body: some View {
         // The tab view along the bottom
