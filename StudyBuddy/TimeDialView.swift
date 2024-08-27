@@ -15,11 +15,6 @@ struct Subject: Identifiable, Hashable {
     
 }
 
-// Everything gets real funky at the bottom the circle
-// I dunno why but it doesn't really matter that much ig
-// There is also a slight rounding error
-// 2 deg by the end, or 1 at the top
-// Will fix later
 struct TimeDialView: View {
     init() {
         _selectedSubject = State(initialValue: subjects[0])
