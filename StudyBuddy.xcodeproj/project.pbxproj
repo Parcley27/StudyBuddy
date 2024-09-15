@@ -8,7 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		6E4A66BE2C265CE90067888E /* StudyBuddyApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E4A66BD2C265CE90067888E /* StudyBuddyApp.swift */; };
-		6E4A66C42C265CEB0067888E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6E4A66C32C265CEB0067888E /* Assets.xcassets */; };
 		6E4A66C72C265CEB0067888E /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6E4A66C62C265CEB0067888E /* Preview Assets.xcassets */; };
 		6E4A66D12C265CEB0067888E /* StudyBuddyTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E4A66D02C265CEB0067888E /* StudyBuddyTests.swift */; };
 		6E4A66DB2C265CEB0067888E /* StudyBuddyUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E4A66DA2C265CEB0067888E /* StudyBuddyUITests.swift */; };
@@ -33,9 +32,9 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		6721FF412C96AB7E00EFE68A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		6E4A66BA2C265CE90067888E /* StudyBuddy.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = StudyBuddy.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		6E4A66BD2C265CE90067888E /* StudyBuddyApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StudyBuddyApp.swift; sourceTree = "<group>"; };
-		6E4A66C32C265CEB0067888E /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		6E4A66C62C265CEB0067888E /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		6E4A66CC2C265CEB0067888E /* StudyBuddyTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = StudyBuddyTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		6E4A66D02C265CEB0067888E /* StudyBuddyTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StudyBuddyTests.swift; sourceTree = "<group>"; };
@@ -45,6 +44,67 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
+		6721FED32C96AA7800EFE68A /* PBXFileSystemSynchronizedBuildFileExceptionSet */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			membershipExceptions = (
+				Assets.xcassets,
+				"Inter/Inter_18pt-Black.ttf",
+				"Inter/Inter_18pt-BlackItalic.ttf",
+				"Inter/Inter_18pt-Bold.ttf",
+				"Inter/Inter_18pt-BoldItalic.ttf",
+				"Inter/Inter_18pt-ExtraBold.ttf",
+				"Inter/Inter_18pt-ExtraBoldItalic.ttf",
+				"Inter/Inter_18pt-ExtraLight.ttf",
+				"Inter/Inter_18pt-ExtraLightItalic.ttf",
+				"Inter/Inter_18pt-Italic.ttf",
+				"Inter/Inter_18pt-Light.ttf",
+				"Inter/Inter_18pt-LightItalic.ttf",
+				"Inter/Inter_18pt-Medium.ttf",
+				"Inter/Inter_18pt-MediumItalic.ttf",
+				"Inter/Inter_18pt-Regular.ttf",
+				"Inter/Inter_18pt-SemiBold.ttf",
+				"Inter/Inter_18pt-SemiBoldItalic.ttf",
+				"Inter/Inter_18pt-Thin.ttf",
+				"Inter/Inter_18pt-ThinItalic.ttf",
+				"Inter/Inter_24pt-Black.ttf",
+				"Inter/Inter_24pt-BlackItalic.ttf",
+				"Inter/Inter_24pt-Bold.ttf",
+				"Inter/Inter_24pt-BoldItalic.ttf",
+				"Inter/Inter_24pt-ExtraBold.ttf",
+				"Inter/Inter_24pt-ExtraBoldItalic.ttf",
+				"Inter/Inter_24pt-ExtraLight.ttf",
+				"Inter/Inter_24pt-ExtraLightItalic.ttf",
+				"Inter/Inter_24pt-Italic.ttf",
+				"Inter/Inter_24pt-Light.ttf",
+				"Inter/Inter_24pt-LightItalic.ttf",
+				"Inter/Inter_24pt-Medium.ttf",
+				"Inter/Inter_24pt-MediumItalic.ttf",
+				"Inter/Inter_24pt-Regular.ttf",
+				"Inter/Inter_24pt-SemiBold.ttf",
+				"Inter/Inter_24pt-SemiBoldItalic.ttf",
+				"Inter/Inter_24pt-Thin.ttf",
+				"Inter/Inter_24pt-ThinItalic.ttf",
+				"Inter/Inter_28pt-Black.ttf",
+				"Inter/Inter_28pt-BlackItalic.ttf",
+				"Inter/Inter_28pt-Bold.ttf",
+				"Inter/Inter_28pt-BoldItalic.ttf",
+				"Inter/Inter_28pt-ExtraBold.ttf",
+				"Inter/Inter_28pt-ExtraBoldItalic.ttf",
+				"Inter/Inter_28pt-ExtraLight.ttf",
+				"Inter/Inter_28pt-ExtraLightItalic.ttf",
+				"Inter/Inter_28pt-Italic.ttf",
+				"Inter/Inter_28pt-Light.ttf",
+				"Inter/Inter_28pt-LightItalic.ttf",
+				"Inter/Inter_28pt-Medium.ttf",
+				"Inter/Inter_28pt-MediumItalic.ttf",
+				"Inter/Inter_28pt-Regular.ttf",
+				"Inter/Inter_28pt-SemiBold.ttf",
+				"Inter/Inter_28pt-SemiBoldItalic.ttf",
+				"Inter/Inter_28pt-Thin.ttf",
+				"Inter/Inter_28pt-ThinItalic.ttf",
+			);
+			target = 6E4A66B92C265CE90067888E /* StudyBuddy */;
+		};
 		6EDC92332C9688120082C74C /* PBXFileSystemSynchronizedBuildFileExceptionSet */ = {
 			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
 			membershipExceptions = (
@@ -68,6 +128,7 @@
 /* End PBXFileSystemSynchronizedBuildFileExceptionSet section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
+		6721FED22C96AA7500EFE68A /* Assets */ = {isa = PBXFileSystemSynchronizedRootGroup; exceptions = (6721FED32C96AA7800EFE68A /* PBXFileSystemSynchronizedBuildFileExceptionSet */, ); explicitFileTypes = {}; explicitFolders = (); path = Assets; sourceTree = "<group>"; };
 		6EDC92302C9687FF0082C74C /* Views */ = {isa = PBXFileSystemSynchronizedRootGroup; exceptions = (6EDC92342C9688150082C74C /* PBXFileSystemSynchronizedBuildFileExceptionSet */, ); explicitFileTypes = {}; explicitFolders = (); path = Views; sourceTree = "<group>"; };
 		6EDC92322C96880E0082C74C /* Misc */ = {isa = PBXFileSystemSynchronizedRootGroup; exceptions = (6EDC92332C9688120082C74C /* PBXFileSystemSynchronizedBuildFileExceptionSet */, ); explicitFileTypes = {}; explicitFolders = (); path = Misc; sourceTree = "<group>"; };
 /* End PBXFileSystemSynchronizedRootGroup section */
@@ -120,10 +181,11 @@
 		6E4A66BC2C265CE90067888E /* StudyBuddy */ = {
 			isa = PBXGroup;
 			children = (
+				6721FF412C96AB7E00EFE68A /* Info.plist */,
 				6E4A66BD2C265CE90067888E /* StudyBuddyApp.swift */,
 				6EDC92322C96880E0082C74C /* Misc */,
 				6EDC92302C9687FF0082C74C /* Views */,
-				6E4A66C32C265CEB0067888E /* Assets.xcassets */,
+				6721FED22C96AA7500EFE68A /* Assets */,
 				6E4A66C52C265CEB0067888E /* Preview Content */,
 			);
 			path = StudyBuddy;
@@ -259,7 +321,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				6E4A66C72C265CEB0067888E /* Preview Assets.xcassets in Resources */,
-				6E4A66C42C265CEB0067888E /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -451,6 +512,7 @@
 				DEVELOPMENT_TEAM = 7WCH78FX92;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = StudyBuddy/Info.plist;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -480,6 +542,7 @@
 				DEVELOPMENT_TEAM = 7WCH78FX92;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = StudyBuddy/Info.plist;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;

@@ -110,8 +110,9 @@ struct ProfileView: View {
                             .padding()
                             
                             VStack(alignment: .leading) {
-                                Text("Hello, Profile")
-                                    .font(.title)
+                                Text("Pierce Oxley")
+                                    .font(.custom("Inter", size: 24))
+                                    //.font(.system(size: 24))
                                 Text("@username")
                                 
                                 HStack(alignment: .top) {
