@@ -3,15 +3,11 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 60;
+	objectVersion = 70;
 	objects = {
 
 /* Begin PBXBuildFile section */
-		6E0B162F2C79137700C79488 /* TimeDialView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E0B162E2C79137700C79488 /* TimeDialView.swift */; };
-		6E0B16312C79396500C79488 /* ViewExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E0B16302C79396500C79488 /* ViewExtensions.swift */; };
 		6E4A66BE2C265CE90067888E /* StudyBuddyApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E4A66BD2C265CE90067888E /* StudyBuddyApp.swift */; };
-		6E4A66C02C265CE90067888E /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E4A66BF2C265CE90067888E /* ContentView.swift */; };
-		6E4A66C22C265CE90067888E /* Item.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E4A66C12C265CE90067888E /* Item.swift */; };
 		6E4A66C42C265CEB0067888E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6E4A66C32C265CEB0067888E /* Assets.xcassets */; };
 		6E4A66C72C265CEB0067888E /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6E4A66C62C265CEB0067888E /* Preview Assets.xcassets */; };
 		6E4A66D12C265CEB0067888E /* StudyBuddyTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E4A66D02C265CEB0067888E /* StudyBuddyTests.swift */; };
@@ -37,12 +33,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		6E0B162E2C79137700C79488 /* TimeDialView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeDialView.swift; sourceTree = "<group>"; };
-		6E0B16302C79396500C79488 /* ViewExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewExtensions.swift; sourceTree = "<group>"; };
 		6E4A66BA2C265CE90067888E /* StudyBuddy.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = StudyBuddy.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		6E4A66BD2C265CE90067888E /* StudyBuddyApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StudyBuddyApp.swift; sourceTree = "<group>"; };
-		6E4A66BF2C265CE90067888E /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
-		6E4A66C12C265CE90067888E /* Item.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Item.swift; sourceTree = "<group>"; };
 		6E4A66C32C265CEB0067888E /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		6E4A66C62C265CEB0067888E /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		6E4A66CC2C265CEB0067888E /* StudyBuddyTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = StudyBuddyTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -51,6 +43,34 @@
 		6E4A66DA2C265CEB0067888E /* StudyBuddyUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StudyBuddyUITests.swift; sourceTree = "<group>"; };
 		6E4A66DC2C265CEB0067888E /* StudyBuddyUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StudyBuddyUITestsLaunchTests.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
+
+/* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
+		6EDC92332C9688120082C74C /* PBXFileSystemSynchronizedBuildFileExceptionSet */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			membershipExceptions = (
+				Item.swift,
+			);
+			target = 6E4A66B92C265CE90067888E /* StudyBuddy */;
+		};
+		6EDC92342C9688150082C74C /* PBXFileSystemSynchronizedBuildFileExceptionSet */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			membershipExceptions = (
+				ContentView.swift,
+				"Home View/HomeView.swift",
+				"Home View/TabItemView.swift",
+				"Home View/TimeDialView.swift",
+				"Profile View/ProfileView.swift",
+				SettingsView/SettingsView.swift,
+				ViewExtensions.swift,
+			);
+			target = 6E4A66B92C265CE90067888E /* StudyBuddy */;
+		};
+/* End PBXFileSystemSynchronizedBuildFileExceptionSet section */
+
+/* Begin PBXFileSystemSynchronizedRootGroup section */
+		6EDC92302C9687FF0082C74C /* Views */ = {isa = PBXFileSystemSynchronizedRootGroup; exceptions = (6EDC92342C9688150082C74C /* PBXFileSystemSynchronizedBuildFileExceptionSet */, ); explicitFileTypes = {}; explicitFolders = (); path = Views; sourceTree = "<group>"; };
+		6EDC92322C96880E0082C74C /* Misc */ = {isa = PBXFileSystemSynchronizedRootGroup; exceptions = (6EDC92332C9688120082C74C /* PBXFileSystemSynchronizedBuildFileExceptionSet */, ); explicitFileTypes = {}; explicitFolders = (); path = Misc; sourceTree = "<group>"; };
+/* End PBXFileSystemSynchronizedRootGroup section */
 
 /* Begin PBXFrameworksBuildPhase section */
 		6E4A66B72C265CE90067888E /* Frameworks */ = {
@@ -101,10 +121,8 @@
 			isa = PBXGroup;
 			children = (
 				6E4A66BD2C265CE90067888E /* StudyBuddyApp.swift */,
-				6E0B16302C79396500C79488 /* ViewExtensions.swift */,
-				6E0B162E2C79137700C79488 /* TimeDialView.swift */,
-				6E4A66BF2C265CE90067888E /* ContentView.swift */,
-				6E4A66C12C265CE90067888E /* Item.swift */,
+				6EDC92322C96880E0082C74C /* Misc */,
+				6EDC92302C9687FF0082C74C /* Views */,
 				6E4A66C32C265CEB0067888E /* Assets.xcassets */,
 				6E4A66C52C265CEB0067888E /* Preview Content */,
 			);
@@ -266,10 +284,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				6E4A66C02C265CE90067888E /* ContentView.swift in Sources */,
-				6E0B162F2C79137700C79488 /* TimeDialView.swift in Sources */,
-				6E4A66C22C265CE90067888E /* Item.swift in Sources */,
-				6E0B16312C79396500C79488 /* ViewExtensions.swift in Sources */,
 				6E4A66BE2C265CE90067888E /* StudyBuddyApp.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
