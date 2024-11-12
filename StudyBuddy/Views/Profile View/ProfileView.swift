@@ -23,9 +23,9 @@ struct StatsView: View {
     var body: some View {
         VStack(alignment: .leading, spacing: 2) {
             Text("\(stat) \(emoji)")
-                .bold()
+                .font(.custom("Inter24pt-SemiBold", size: 20))
             Text(caption)
-                .font(.caption)
+                .font(.custom("Inter24pt-Regular", size: 13))
                 .foregroundStyle(.secondary)
             
         }
@@ -146,16 +146,16 @@ struct ProfileView: View {
 //                                    .font(.title)
                                     .font(.custom("Inter24pt-Bold", size: 20))
                                 Text("@greenpowderranger")
-                                    .font(.custom("Inter24pt-Regular", size: 14))
+                                    .font(.custom("Inter24pt-Regular", size: 16))
                                 
 //                                Rectangle()
 //                                    .fill(Color("3D4399"))
 //                                    .frame(maxWidth: .infinity)
 //                                    .frame(height: 1)
                                 HStack(alignment: .top) {
-                                    StatsView("3.5k", "💡", "IQ")
+                                    StatsView("30", "⭐", "Level")
                                     StatsView("71d", "🔥", "Streak")
-                                    StatsView("Bio", "🧬", "Fav. Subject")
+                                    StatsView("61", "⏰", "Hours")
                                 }
 //                                .padding(.top, -5)
                             }
@@ -164,14 +164,14 @@ struct ProfileView: View {
                             
                         }
 
-                        HStack(spacing: 7) {
+                        HStack(spacing: 10) {
                             Capsule(style: .continuous)
                                 .fill(Color("3D4399"))
-                                .frame(maxWidth: .infinity, minHeight: 27)
+                                .frame(maxWidth: .infinity, minHeight: 30)
                                 .overlay(
                                     Text("Add friends")
                                         .foregroundColor(.white)
-                                        .font(.custom("Inter24pt-SemiBold", size:12))
+                                        .font(.custom("Inter24pt-SemiBold", size:14))
                                 )
                             
                             Capsule(style: .continuous)
@@ -180,7 +180,7 @@ struct ProfileView: View {
                                 .overlay(
                                     Text("Edit profile")
                                         .foregroundColor(.white)
-                                        .font(.custom("Inter24pt-SemiBold", size:12))
+                                        .font(.custom("Inter24pt-SemiBold", size:14))
                                 )
                         }
                         .padding(.horizontal)
@@ -189,15 +189,15 @@ struct ProfileView: View {
                             VStack(alignment: .leading) {
                                 
                                 Text("About")
-                                    .font(.custom("Inter24pt-SemiBold", size:14))
+                                    .font(.custom("Inter24pt-SemiBold", size:16))
                                     .foregroundStyle(.secondary)
                                     .padding(.bottom, 1)
                                 
                                 Text("Hi everyone! My name is Pierce and I love horses, especially Polish ones. I also enjoy iOS development in my free time.")
-                                    .font(.custom("Inter24pt-Regular", size: 14))
+                                    .font(.custom("Inter24pt-Regular", size: 16))
                                 
                                 Text("Joined Apr 26, 2024 · 124 days ago")
-                                    .font(.caption)
+                                    .font(.custom("Inter24pt-Regular", size: 13))
                                     .foregroundStyle(.secondary)
                                     .padding(.top, 1)
                                 
