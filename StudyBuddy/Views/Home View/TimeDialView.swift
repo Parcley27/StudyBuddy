@@ -10,7 +10,7 @@ import SwiftUI
 struct Subject: Identifiable, Hashable {
     var name: String = "Subject Name"
     var icon: String = "book"
-    var colour: Color = .blue
+    var colour: Color = .purple
     var id: UUID = UUID()
     
 }
@@ -59,11 +59,11 @@ struct TimeDialView: View {
     
     var subjects: [Subject] = [
         Subject(name: "English"),
-        Subject(name: "Math", icon: "x.squareroot", colour: .red),
-        Subject(name: "Science", icon: "atom", colour: .green),
-        Subject(name: "Socials", icon: "person.2.wave.2", colour: .brown),
-        Subject(name: "Astronomy", icon: "globe.desk", colour: .purple),
-        Subject(name: "Health", icon: "heart", colour: .pink)
+        Subject(name: "Math", icon: "x.squareroot"),
+        Subject(name: "Science", icon: "atom"),
+        Subject(name: "Socials", icon: "person.2.wave.2"),
+        Subject(name: "Astronomy", icon: "globe.desk"),
+        Subject(name: "Health", icon: "heart")
         
     ]
     
@@ -186,6 +186,7 @@ struct TimeDialView: View {
             
             VStack {
                 ZStack {
+                    /*
                     VStack {
                         Button {
                             print("Start")
@@ -209,36 +210,75 @@ struct TimeDialView: View {
                         
                         Spacer()
                     }
+                     */
                     
-                    Circle()
-                        .stroke(Color(.systemGray5), lineWidth: 60)
+                    ZStack() {
+                        Circle()
+                            .stroke(Color(.purple), lineWidth: 60)
+                        Circle()
+                            .stroke(Color(.blue), lineWidth: 60)
+                            .opacity(0.4)
+                    }
+                    .opacity(0.25)
+                    .blur(radius: 20)
+                    
                     
                     let reverseRotation = (startProgress > endProgress) ? -Double((1 - startProgress) * 360) : 0
                     
+                    
                     Circle()
                         .trim(from: startProgress > endProgress ? 0 : startProgress, to: endProgress + (-reverseRotation / 360))
-                        .stroke(selectedSubject.colour, style: StrokeStyle(lineWidth: 50, lineCap: .round, lineJoin: .round))
+                        .stroke(selectedSubject.colour, style: StrokeStyle(lineWidth: 52, lineCap: .round, lineJoin: .round))
                         .rotationEffect(.init(degrees: 90))
                         .rotationEffect(.init(degrees: reverseRotation))
+                    
+                    Circle()
+                        .trim(from: startProgress > endProgress ? 0 : startProgress, to: endProgress + (-reverseRotation / 360))
+                        .stroke(.background, style: StrokeStyle(lineWidth: 50, lineCap: .round, lineJoin: .round))
+                        .rotationEffect(.init(degrees: 90))
+                        .rotationEffect(.init(degrees: reverseRotation))
+                
+                    ZStack {
+                        Circle()
+                            .trim(from: startProgress > endProgress ? 0 : startProgress, to: endProgress + (-reverseRotation / 360))
+                            .stroke(.purple, style: StrokeStyle(lineWidth: 40, lineCap: .round, lineJoin: .round))
+                            .rotationEffect(.init(degrees: 90))
+                            .rotationEffect(.init(degrees: reverseRotation))
+                        
+                        Circle()
+                            .trim(from: startProgress > endProgress ? 0 : startProgress, to: endProgress + (-reverseRotation / 360))
+                            .stroke(.blue, style: StrokeStyle(lineWidth: 40, lineCap: .round, lineJoin: .round))
+                            .rotationEffect(.init(degrees: 90))
+                            .rotationEffect(.init(degrees: reverseRotation))
+                            .opacity(0.4)
+                    }
+                    .opacity(0.3)
+                    .blur(radius: 20)
+
                     
                     ForEach(1...timeTicksNeeded + 2, id: \.self) { index in
                         let tickRotation: Double = (Double(Double(index) * Double(tickInterval)) + Double(startAngle)) > endAngle ? endAngle : Double(Double(index) * Double(tickInterval)) + Double(startAngle)
                         
                         Capsule()
-                            .frame(width: 3.5, height: (index + 1).isMultiple(of: 2) ? 30 : 25)
+                            .fill(selectedSubject.colour)
+                            .frame(width: 2, height: (index + 1).isMultiple(of: 2) ? 30 : 25)
                             .foregroundStyle(.background)
                             .offset(y: width / 2)
                             .rotationEffect(.init(degrees: tickRotation))
+                            .opacity(tickRotation >= (endAngle - 5) ? 0 : 1)
                             .opacity((index + 1).isMultiple(of: 2) ? 1 : 0.5)
                         
                     }
                     
                     //Image(systemName: "person.fill")
+                    
                     Text("Now")
-                        .bold()
-                        .foregroundStyle(.background)
+                        .foregroundStyle(.white)
                         .frame(width: 50, height: 50)
-                        .background(selectedSubject.colour, in: Circle())
+                        //.background((.black), in: Circle())
+                        //.bold()
+                        //.foregroundStyle(.background)
+                        
                         .rotationEffect(.init(degrees: -90))
                         .rotationEffect(.init(degrees: -startAngle))
                         .offset(x: width / 2)
@@ -247,10 +287,11 @@ struct TimeDialView: View {
                     
                     Image(systemName: selectedSubject.icon)
                         .font(.title2)
-                        .bold()
-                        .foregroundStyle(.background)
+                        //.bold()
+                        .foregroundStyle(.white)
                         .frame(width: 50, height: 50)
-                        .background(selectedSubject.colour, in: Circle())
+                        //.background((.black), in: Circle())
+                        //.background(selectedSubject.colour, in: Circle())
                         .rotationEffect(.init(degrees: -90))
                         .rotationEffect(.init(degrees: -endAngle))
                         .offset(x: width / 2)
@@ -302,7 +343,6 @@ struct TimeDialView: View {
                                     HStack {
                                         if selectedSubject == subject {
                                             Text("✓  \(subject.name)")
-                                                .bold()
                                             Image(systemName: subject.icon)
                                             
                                         } else {

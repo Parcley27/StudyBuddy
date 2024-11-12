@@ -100,19 +100,51 @@ struct ProfileView: View {
                     LazyVStack {
                         HStack(alignment: .bottom) {
                             ZStack {
+                                ZStack {
+                                    Circle()
+                                        .fill(.purple)
+                                        .frame(width: 92, height: 92)
+                                    
+                                    Circle()
+                                        .fill(.blue)
+                                        .frame(width: 92, height: 92)
+                                        .opacity(0.4)
+                                }
+                                .blur(radius: 5)
+                                .opacity(0.7)
+                                
+                                
                                 Circle()
-                                    .fill(.tertiary)
+                                    .fill(.gray)
                                     .frame(width: 90, height: 90)
                                 Image(systemName: "person.fill")
                                     .font(.system(size: 58))
                                     .foregroundStyle(.background)
+                                
                             }
                             .padding()
                             
                             VStack(alignment: .leading) {
-                                Text("User Name")
-                                    .font(.custom("Inter24pt-Bold", size: 24))
+                                Text("Hello, **Name**")
+                                    .font(.title)
+                                    //.font(.custom("Inter24pt-Bold", size: 24))
                                 Text("@username")
+                                
+                                
+                                
+                                ZStack() {
+                                    Rectangle()
+                                        .fill(.purple)
+                                        .frame(maxWidth: .infinity)
+                                        .frame(height: 1)
+                                    
+                                    Rectangle()
+                                        .fill(.blue)
+                                        .frame(maxWidth: .infinity)
+                                        .frame(height: 1)
+                                        .opacity(0.4)
+                                    
+                                }
                                 
                                 HStack(alignment: .top) {
                                     StatsView("3.5k", "💡", "IQ")
