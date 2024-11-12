@@ -1,5 +1,5 @@
 //
-//  ColourExtensions.swift
+//  ColorExtensions.swift
 //  StudyBuddy
 //
 //  Created by Pierce Oxley on 11/11/24.
@@ -21,8 +21,9 @@ extension Color {
         let blue = Double(rgb & 0xFF) / 255.0
 
         self.init(.sRGB, red: red, green: green, blue: blue, opacity: 1.0)
+        
     }
 }
 
 // Usage:
-let color = Color("#FF5733")
+//let color = Color("#FF5733")
