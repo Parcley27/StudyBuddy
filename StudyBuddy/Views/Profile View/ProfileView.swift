@@ -140,25 +140,27 @@ struct ProfileView: View {
                             Spacer()
                             
                         }
-                        
-                        HStack(spacing: 20) {
+
+                        HStack(spacing: 7) {
                             Capsule(style: .continuous)
                                 .fill(Color("3D4399"))
-                                .frame(width: 150, height: 25)
+                                .frame(maxWidth: .infinity, minHeight: 27)
                                 .overlay(
-                                    Text("Add Friends")
+                                    Text("Add friends")
                                         .foregroundColor(.white)
-                                    
+                                        .font(.custom("Inter24pt-SemiBold", size:12))
                                 )
-                                                        
+                            
                             Capsule(style: .continuous)
                                 .fill(Color("3D4399"))
-                                .frame(width: 150, height: 25)
+                                .frame(maxWidth: .infinity, minHeight: 27)
                                 .overlay(
-                                    Text("Edit Profile")
+                                    Text("Edit profile")
                                         .foregroundColor(.white)
+                                        .font(.custom("Inter24pt-SemiBold", size:12))
                                 )
                         }
+                        .padding(.horizontal)
                         
                         HStack(alignment: .center) {
                             VStack(alignment: .leading) {
