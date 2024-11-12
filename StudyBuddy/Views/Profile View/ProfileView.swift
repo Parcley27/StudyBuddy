@@ -89,6 +89,7 @@ struct ProfileView: View {
                             .fill(.blue)
                             .frame(width: 200, height: 100)
                             .blur(radius: 100)
+                        
                     }
                     
                     Spacer()
@@ -100,19 +101,10 @@ struct ProfileView: View {
                     LazyVStack {
                         HStack(alignment: .bottom) {
                             ZStack {
-                                ZStack {
-                                    Circle()
-                                        .fill(.purple)
-                                        .frame(width: 92, height: 92)
-                                    
-                                    Circle()
-                                        .fill(.blue)
-                                        .frame(width: 92, height: 92)
-                                        .opacity(0.4)
-                                }
-                                .blur(radius: 5)
-                                .opacity(0.7)
-                                
+                                Circle()
+                                    .fill(Color("3D4399"))
+                                    .frame(width: 92, height: 92)
+                                    .blur(radius: 5)
                                 
                                 Circle()
                                     .fill(.gray)
@@ -130,21 +122,10 @@ struct ProfileView: View {
                                     //.font(.custom("Inter24pt-Bold", size: 24))
                                 Text("@username")
                                 
-                                
-                                
-                                ZStack() {
-                                    Rectangle()
-                                        .fill(.purple)
-                                        .frame(maxWidth: .infinity)
-                                        .frame(height: 1)
-                                    
-                                    Rectangle()
-                                        .fill(.blue)
-                                        .frame(maxWidth: .infinity)
-                                        .frame(height: 1)
-                                        .opacity(0.4)
-                                    
-                                }
+                                Rectangle()
+                                    .fill(Color("3D4399"))
+                                    .frame(maxWidth: .infinity)
+                                    .frame(height: 1)
                                 
                                 HStack(alignment: .top) {
                                     StatsView("3.5k", "💡", "IQ")
@@ -156,6 +137,25 @@ struct ProfileView: View {
                             
                             Spacer()
                             
+                        }
+                        
+                        HStack(spacing: 20) {
+                            Capsule(style: .continuous)
+                                .fill(Color("3D4399"))
+                                .frame(width: 150, height: 25)
+                                .overlay(
+                                    Text("Add Friends")
+                                        .foregroundColor(.white)
+                                    
+                                )
+                                                        
+                            Capsule(style: .continuous)
+                                .fill(Color("3D4399"))
+                                .frame(width: 150, height: 25)
+                                .overlay(
+                                    Text("Edit Profile")
+                                        .foregroundColor(.white)
+                                )
                         }
                         
                         Text("Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis pellentesque, mauris sit amet lacinia semper, sem libero tempus metus, quis pellentesque nulla quam id sem. Nam bibendum est a imperdiet fermentum. Integer sit amet risus risus. Nullam interdum pulvinar tellus, ac dictum arcu semper id. Quisque ornare eget nisi at pharetra. Nunc a eros eu augue accumsan sodales. Quisque vehicula nisi quis turpis cursus, et interdum dolor pulvinar. Duis ultricies rutrum nunc, ac consectetur justo venenatis id. Duis fringilla est lectus, nec mollis nunc consequat eu. Suspendisse ac justo venenatis, commodo ipsum in, cursus nunc. Quisque dictum nisl in nisl auctor, id feugiat turpis congue. Aliquam erat volutpat. Integer tincidunt hendrerit augue, quis feugiat felis porttitor vel. Proin non fringilla mauris, in vehicula massa. Nam est justo, viverra quis risus sed, placerat molestie urna. Etiam volutpat condimentum libero vel hendrerit.")
