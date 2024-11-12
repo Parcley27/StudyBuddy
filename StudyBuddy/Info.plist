@@ -6,6 +6,9 @@
 	<array>
 		<string>Inter_24pt-Regular.ttf</string>
 		<string>Inter_24pt-Bold.ttf</string>
+		<string>Inter_24pt-Bold.ttf</string>
+		<string>Inter_24pt-SemiBold.ttf</string>
+		<string>Inter_24pt-Regular.ttf</string>
 	</array>
 </dict>
 </plist>

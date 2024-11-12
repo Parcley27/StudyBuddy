@@ -20,7 +20,7 @@ struct StatsView: View {
     @State var caption: String
     
     var body: some View {
-        VStack(alignment: .leading, spacing: 0) {
+        VStack(alignment: .leading, spacing: 2) {
             Text("\(stat) \(emoji)")
                 .bold()
             Text(caption)
@@ -28,7 +28,7 @@ struct StatsView: View {
                 .foregroundStyle(.secondary)
             
         }
-        .padding(.vertical, 2)
+        .padding(.top, 1)
         .frame(width: 70, alignment: .leading)
         
     }
@@ -68,43 +68,45 @@ struct ProfileView: View {
     var body: some View {
         NavigationStack {
             ZStack {
-                VStack {
-                    ZStack {
-                        Circle()
-                            .fill(.blue)
-                            .frame(width: 200, height: 100)
-                            .blur(radius: 100)
-                        
-                        Circle()
-                            .fill(.purple)
-                            .frame(width: 200, height: 100)
-                            .blur(radius: 100)
-                        
-                        Circle()
-                            .fill(.purple)
-                            .frame(width: 200, height: 100)
-                            .blur(radius: 100)
-                        
-                        Circle()
-                            .fill(.blue)
-                            .frame(width: 200, height: 100)
-                            .blur(radius: 100)
-                        
-                    }
+                Color("1A1A1A")
+                    .ignoresSafeArea()
+//                VStack {
+//                    ZStack {
+//                        Circle()
+//                            .fill(.blue)
+//                            .frame(width: 200, height: 100)
+//                            .blur(radius: 100)
+//                        
+//                        Circle()
+//                            .fill(.purple)
+//                            .frame(width: 200, height: 100)
+//                            .blur(radius: 100)
+//                        
+//                        Circle()
+//                            .fill(.purple)
+//                            .frame(width: 200, height: 100)
+//                            .blur(radius: 100)
+//                        
+//                        Circle()
+//                            .fill(.blue)
+//                            .frame(width: 200, height: 100)
+//                            .blur(radius: 100)
+//                        
+//                    }
                     
-                    Spacer()
-                    
-                }
-                .ignoresSafeArea(.all)
+//                    Spacer()
+//                    
+//                }
+//                .ignoresSafeArea(.all)
                 
                 ScrollView {
                     LazyVStack {
-                        HStack(alignment: .bottom) {
+                        HStack(alignment: .center) {
                             ZStack {
-                                Circle()
-                                    .fill(Color("3D4399"))
-                                    .frame(width: 92, height: 92)
-                                    .blur(radius: 5)
+//                                Circle()
+//                                    .fill(Color("3D4399"))
+//                                    .frame(width: 92, height: 92)
+//                                    .blur(radius: 5)
                                 
                                 Circle()
                                     .fill(.gray)
@@ -117,22 +119,22 @@ struct ProfileView: View {
                             .padding()
                             
                             VStack(alignment: .leading) {
-                                Text("Hello, **Name**")
-                                    .font(.title)
-                                    //.font(.custom("Inter24pt-Bold", size: 24))
-                                Text("@username")
+                                Text("Pierce Oxley")
+//                                    .font(.title)
+                                    .font(.custom("Inter24pt-Bold", size: 20))
+                                Text("@greenpowderranger")
+                                    .font(.custom("Inter24pt-Regular", size: 14))
                                 
-                                Rectangle()
-                                    .fill(Color("3D4399"))
-                                    .frame(maxWidth: .infinity)
-                                    .frame(height: 1)
-                                
+//                                Rectangle()
+//                                    .fill(Color("3D4399"))
+//                                    .frame(maxWidth: .infinity)
+//                                    .frame(height: 1)
                                 HStack(alignment: .top) {
                                     StatsView("3.5k", "💡", "IQ")
                                     StatsView("71d", "🔥", "Streak")
                                     StatsView("Bio", "🧬", "Fav. Subject")
-                                    
                                 }
+//                                .padding(.top, -5)
                             }
                             
                             Spacer()
@@ -157,6 +159,27 @@ struct ProfileView: View {
                                         .foregroundColor(.white)
                                 )
                         }
+                        
+                        HStack(alignment: .center) {
+                            VStack(alignment: .leading) {
+                                
+                                Text("About")
+                                    .font(.custom("Inter24pt-SemiBold", size:14))
+                                    .foregroundStyle(.secondary)
+                                    .padding(.bottom, 1)
+                                
+                                Text("Hi everyone! My name is Pierce and I love horses, especially Polish ones. I also enjoy iOS development in my free time.")
+                                    .font(.custom("Inter24pt-Regular", size: 14))
+                                
+                                Text("Joined Apr 26, 2024 · 124 days ago")
+                                    .font(.caption)
+                                    .foregroundStyle(.secondary)
+                                    .padding(.top, 1)
+                                
+                            } .padding()
+                            Spacer()
+                        }
+                        
                         
                         Text("Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis pellentesque, mauris sit amet lacinia semper, sem libero tempus metus, quis pellentesque nulla quam id sem. Nam bibendum est a imperdiet fermentum. Integer sit amet risus risus. Nullam interdum pulvinar tellus, ac dictum arcu semper id. Quisque ornare eget nisi at pharetra. Nunc a eros eu augue accumsan sodales. Quisque vehicula nisi quis turpis cursus, et interdum dolor pulvinar. Duis ultricies rutrum nunc, ac consectetur justo venenatis id. Duis fringilla est lectus, nec mollis nunc consequat eu. Suspendisse ac justo venenatis, commodo ipsum in, cursus nunc. Quisque dictum nisl in nisl auctor, id feugiat turpis congue. Aliquam erat volutpat. Integer tincidunt hendrerit augue, quis feugiat felis porttitor vel. Proin non fringilla mauris, in vehicula massa. Nam est justo, viverra quis risus sed, placerat molestie urna. Etiam volutpat condimentum libero vel hendrerit.")
                             .padding()
