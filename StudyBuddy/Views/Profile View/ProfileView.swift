@@ -88,6 +88,9 @@ struct ShareIcon: View {
 }
 
 struct ProfileView: View {
+    @State private var isEditProfilePresented = false
+    @State private var isAddFriendsPresented = false
+    
     var body: some View {
         NavigationStack {
             ZStack {
@@ -154,7 +157,7 @@ struct ProfileView: View {
 //                                    .frame(height: 1)
                                 HStack(alignment: .top) {
                                     StatsView("30", "⭐", "Level")
-                                    StatsView("71d", "🔥", "Streak")
+                                    StatsView("71", "🔥", "Streak")
                                     StatsView("61", "⏰", "Hours")
                                 }
 //                                .padding(.top, -5)
@@ -165,23 +168,37 @@ struct ProfileView: View {
                         }
 
                         HStack(spacing: 10) {
-                            Capsule(style: .continuous)
-                                .fill(Color("3D4399"))
-                                .frame(maxWidth: .infinity, minHeight: 30)
-                                .overlay(
-                                    Text("Add friends")
-                                        .foregroundColor(.white)
-                                        .font(.custom("Inter24pt-SemiBold", size:14))
-                                )
-                            
-                            Capsule(style: .continuous)
-                                .fill(Color("#3D4399"))
-                                .frame(maxWidth: .infinity, minHeight: 27)
-                                .overlay(
-                                    Text("Edit profile")
-                                        .foregroundColor(.white)
-                                        .font(.custom("Inter24pt-SemiBold", size:14))
-                                )
+                            Button(action: {
+                                isAddFriendsPresented = true
+                            }) {
+                                Capsule(style: .continuous)
+                                    .fill(Color("3D4399"))
+                                    .frame(maxWidth: .infinity, minHeight: 32)
+                                    .overlay(
+                                        Text("Add friends")
+                                            .foregroundColor(.white)
+                                            .font(.custom("Inter24pt-SemiBold", size: 16))
+                                    )
+                            }
+                            .fullScreenCover(isPresented: $isAddFriendsPresented) {
+                                AddFriendsView()
+                            }
+
+                            Button(action: {
+                                isEditProfilePresented = true
+                            }) {
+                                Capsule(style: .continuous)
+                                    .fill(Color("3D4399"))
+                                    .frame(maxWidth: .infinity, minHeight: 32)
+                                    .overlay(
+                                        Text("Edit profile")
+                                            .foregroundColor(.white)
+                                            .font(.custom("Inter24pt-SemiBold", size: 16))
+                                    )
+                            }
+                            .fullScreenCover(isPresented: $isEditProfilePresented) {
+                                EditProfileView()
+                            }
                         }
                         .padding(.horizontal)
                         
