@@ -105,10 +105,17 @@
 			);
 			target = 6E4A66B92C265CE90067888E /* StudyBuddy */;
 		};
-		6EDC92332C9688120082C74C /* PBXFileSystemSynchronizedBuildFileExceptionSet */ = {
+		6E8341052CE332640059B4DE /* PBXFileSystemSynchronizedBuildFileExceptionSet */ = {
 			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
 			membershipExceptions = (
 				Item.swift,
+			);
+			target = 6E4A66B92C265CE90067888E /* StudyBuddy */;
+		};
+		6E8341082CE332AA0059B4DE /* PBXFileSystemSynchronizedBuildFileExceptionSet */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			membershipExceptions = (
+				HistoryChartData.swift,
 			);
 			target = 6E4A66B92C265CE90067888E /* StudyBuddy */;
 		};
@@ -119,15 +126,17 @@
 				"Home View/HomeView.swift",
 				"Home View/TabItemView.swift",
 				"Home View/TimeDialView.swift",
+				"Profile View/ChartView.swift",
 				"Profile View/ProfileView.swift",
-				SettingsView/SettingsView.swift,
+				"Profile View/SettingsView/SettingsView.swift",
 			);
 			target = 6E4A66B92C265CE90067888E /* StudyBuddy */;
 		};
 		6EEB4DB02CE30D1200FF08E7 /* PBXFileSystemSynchronizedBuildFileExceptionSet */ = {
 			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
 			membershipExceptions = (
-				ColourExtensions.swift,
+				ColorExtensions.swift,
+				DateExtensions.swift,
 				ViewExtensions.swift,
 			);
 			target = 6E4A66B92C265CE90067888E /* StudyBuddy */;
@@ -136,8 +145,9 @@
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
 		6721FED22C96AA7500EFE68A /* Assets */ = {isa = PBXFileSystemSynchronizedRootGroup; exceptions = (6721FED32C96AA7800EFE68A /* PBXFileSystemSynchronizedBuildFileExceptionSet */, ); explicitFileTypes = {}; explicitFolders = (); path = Assets; sourceTree = "<group>"; };
+		6E8340FC2CE332470059B4DE /* Data Types */ = {isa = PBXFileSystemSynchronizedRootGroup; exceptions = (6E8341082CE332AA0059B4DE /* PBXFileSystemSynchronizedBuildFileExceptionSet */, ); explicitFileTypes = {}; explicitFolders = (); path = "Data Types"; sourceTree = "<group>"; };
+		6E8341032CE332640059B4DE /* Misc */ = {isa = PBXFileSystemSynchronizedRootGroup; exceptions = (6E8341052CE332640059B4DE /* PBXFileSystemSynchronizedBuildFileExceptionSet */, ); explicitFileTypes = {}; explicitFolders = (); path = Misc; sourceTree = "<group>"; };
 		6EDC92302C9687FF0082C74C /* Views */ = {isa = PBXFileSystemSynchronizedRootGroup; exceptions = (6EDC92342C9688150082C74C /* PBXFileSystemSynchronizedBuildFileExceptionSet */, ); explicitFileTypes = {}; explicitFolders = (); path = Views; sourceTree = "<group>"; };
-		6EDC92322C96880E0082C74C /* Misc */ = {isa = PBXFileSystemSynchronizedRootGroup; exceptions = (6EDC92332C9688120082C74C /* PBXFileSystemSynchronizedBuildFileExceptionSet */, ); explicitFileTypes = {}; explicitFolders = (); path = Misc; sourceTree = "<group>"; };
 		6EEB4DAE2CE30D1200FF08E7 /* Extensions */ = {isa = PBXFileSystemSynchronizedRootGroup; exceptions = (6EEB4DB02CE30D1200FF08E7 /* PBXFileSystemSynchronizedBuildFileExceptionSet */, ); explicitFileTypes = {}; explicitFolders = (); path = Extensions; sourceTree = "<group>"; };
 /* End PBXFileSystemSynchronizedRootGroup section */
 
@@ -192,8 +202,9 @@
 				6721FF412C96AB7E00EFE68A /* Info.plist */,
 				6E4A66BD2C265CE90067888E /* StudyBuddyApp.swift */,
 				6EEB4DAE2CE30D1200FF08E7 /* Extensions */,
-				6EDC92322C96880E0082C74C /* Misc */,
+				6E8340FC2CE332470059B4DE /* Data Types */,
 				6EDC92302C9687FF0082C74C /* Views */,
+				6E8341032CE332640059B4DE /* Misc */,
 				6721FED22C96AA7500EFE68A /* Assets */,
 				6E4A66C52C265CEB0067888E /* Preview Content */,
 			);

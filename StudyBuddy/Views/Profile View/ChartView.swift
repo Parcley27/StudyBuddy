@@ -9,12 +9,12 @@ import SwiftUI
 import Charts
 
 struct ChartView: View {
-    var height: Int = 300
+    var height: Int = 250
     var days: Int = 7
     
     @State var ChartData: [HistoryChartData]
     
-    init(height: Int = 300, days: Int = 7) {
+    init(height: Int = 250, days: Int = 7) {
         self.height = height
         self.days = days
         
