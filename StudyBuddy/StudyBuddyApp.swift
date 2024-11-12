@@ -31,7 +31,7 @@ struct StudyBuddyApp: App {
     var body: some Scene {
         WindowGroup {
             ContentView()
-            
+                .preferredColorScheme(.dark)
         }
         // This would pass along the local storage information to the window group and then into the content view if we were using it
         //.modelContainer(sharedModelContainer)
