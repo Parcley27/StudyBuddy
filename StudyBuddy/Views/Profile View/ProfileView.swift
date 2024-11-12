@@ -25,7 +25,7 @@ struct StatsView: View {
             Text("\(stat) \(emoji)")
                 .font(.custom("Inter24pt-SemiBold", size: 20))
             Text(caption)
-                .font(.custom("Inter24pt-Regular", size: 13))
+                .font(.custom("Inter24pt-Regular", size: 14))
                 .foregroundStyle(.secondary)
             
         }
@@ -197,7 +197,7 @@ struct ProfileView: View {
                                     .font(.custom("Inter24pt-Regular", size: 16))
                                 
                                 Text("Joined Apr 26, 2024 · 124 days ago")
-                                    .font(.custom("Inter24pt-Regular", size: 13))
+                                    .font(.custom("Inter24pt-Regular", size: 14))
                                     .foregroundStyle(.secondary)
                                     .padding(.top, 1)
                                 
