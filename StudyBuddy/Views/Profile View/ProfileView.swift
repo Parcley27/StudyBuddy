@@ -35,19 +35,36 @@ struct StatsView: View {
     }
 }
 
+struct CloseIcon: View {
+    var body: some View {
+        if let image = UIImage(named: "close")?.withConfiguration(UIImage.SymbolConfiguration(pointSize: 24, weight: .regular)) {
+            Button(action: {
+                print("Close button tapped")
+            }) {
+                Image(uiImage: image)
+                    .renderingMode(.template)
+                    .foregroundColor(.white)
+            }
+        } else {
+            Text("Image not found")
+                .foregroundColor(.red)
+        }
+    }
+}
+
 struct SettingsIcon: View {
     var body: some View {
-        ZStack {
-            NavigationLink {
-                SettingsView()
-                
-            } label: {
-                Image(systemName: "gearshape")
-                    .padding(4)
-                    .background(.bar, in: Circle())
-                    .foregroundStyle(.white)
-                
+        if let image = UIImage(named: "settings")?.withConfiguration(UIImage.SymbolConfiguration(pointSize: 20, weight: .regular)) {
+            ZStack {
+                NavigationLink(destination: SettingsView()) {
+                    Image(uiImage: image)
+                        .renderingMode(.template)
+                        .foregroundColor(.white)
+                }
             }
+        } else {
+            Text("Image not found")
+                .foregroundColor(.red)
         }
     }
 }
@@ -55,12 +72,17 @@ struct SettingsIcon: View {
 struct ShareIcon: View {
     var body: some View {
         ShareLink(item: "Hello, Profile Sharing!") {
-            Image(systemName: "square.and.arrow.up")
-                .padding(.bottom, 2)
-                .padding(6)
-                .background(.bar, in: Circle())
-                .foregroundStyle(.white)
-            
+            if let image = UIImage(named: "ios_share")?.withConfiguration(UIImage.SymbolConfiguration(pointSize: 20, weight: .regular)) {
+                ZStack {
+                    Image(uiImage: image)
+                        .renderingMode(.template)
+                        .foregroundColor(.white)
+                        .padding(.bottom, 1) // Adjust for slightly lower SVG
+                }
+            } else {
+                Text("Image not found")
+                    .foregroundColor(.red)
+            }
         }
     }
 }
@@ -248,6 +270,10 @@ struct ProfileView: View {
             //.navigationTitle("Profile")
             //.navigationBarTitleDisplayMode(.inline)
             .toolbar {
+//                ToolbarItem(placement: .topBarLeading) {
+//                    CloseIcon()
+//                }
+                
                 ToolbarItem(placement: .topBarTrailing) {
                     ShareIcon()
                     
@@ -259,10 +285,10 @@ struct ProfileView: View {
                 }
             }
             .toolbarBackground(
-                RadialGradient(gradient: Gradient(colors: [.clear, .yellow, .green, .blue, .purple]), center: .center, startRadius: 50, endRadius: 100)
+                Color("1A1A1A")
 
             )
-            .toolbarBackgroundVisibility(.hidden)
+//            .toolbarBackgroundVisibility(.hidden)
             
         }
     }
