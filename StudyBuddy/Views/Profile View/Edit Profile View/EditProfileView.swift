@@ -17,6 +17,7 @@ struct EditProfileView: View {
                 Text("Hello, Edit Profile View!")
                     .padding()
                 // Additional content can go here
+                
             }
             .navigationBarTitleDisplayMode(.inline)
             .toolbar {
@@ -24,15 +25,18 @@ struct EditProfileView: View {
                     Text("Edit profile")
                         .font(.custom("Inter24pt-Bold", size: 16))
                         .foregroundColor(.primary)
+                    
                 }
                 
                 ToolbarItem(placement: .navigationBarLeading) {
                     Button(action: {
                         presentationMode.wrappedValue.dismiss()
+                        
                     }) {
                         Text("Cancel")
                             .foregroundColor(.gray)
                             .font(.custom("Inter24pt-Bold", size: 16))
+                        
                     }
                 }
             }
@@ -42,4 +46,5 @@ struct EditProfileView: View {
 
 #Preview {
     EditProfileView()
+    
 }

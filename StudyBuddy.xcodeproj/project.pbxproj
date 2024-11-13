@@ -126,11 +126,11 @@
 				"Home View/HomeView.swift",
 				"Home View/TabItemView.swift",
 				"Home View/TimeDialView.swift",
-				"Profile View/AddFriendsView.swift",
+				"Profile View/Add Friends View/AddFriendsView.swift",
 				"Profile View/ChartView.swift",
-				"Profile View/EditProfileView.swift",
+				"Profile View/Edit Profile View/EditProfileView.swift",
 				"Profile View/ProfileView.swift",
-				"Profile View/SettingsView.swift",
+				"Profile View/Settings View/SettingsView.swift",
 			);
 			target = 6E4A66B92C265CE90067888E /* StudyBuddy */;
 		};
