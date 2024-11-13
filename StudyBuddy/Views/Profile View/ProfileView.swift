@@ -97,7 +97,7 @@ struct ProfileView: View {
     var body: some View {
         NavigationStack {
             ZStack {
-                Color("1A1A1A")
+                Color.backgroundPrimary
                     .ignoresSafeArea()
 //                VStack {
 //                    ZStack {
@@ -353,7 +353,7 @@ struct ProfileView: View {
                 }
             }
             .toolbarBackground(
-                Color("1A1A1A")
+                Color.backgroundPrimary
 
             )
 //            .toolbarBackgroundVisibility(.hidden)
