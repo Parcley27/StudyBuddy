@@ -19,10 +19,13 @@ struct ChartView: View {
         Chart {
             ForEach(chartData, id: \.id) { sessionHistory in
                 BarMark(
-                    x: .value("Date", sessionHistory.date),
+                    x: .value("Date", sessionHistory.date, unit: .day),
                     y: .value("Session Length", sessionHistory.minutesStudied)
                 )
+                .cornerRadius(5)
                 .foregroundStyle(Color.purplePrimary)
+                // Lighter tips
+                //.foregroundStyle(Color.purplePrimary.gradient)
                 
             }
         }
