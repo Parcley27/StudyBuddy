@@ -219,7 +219,7 @@ struct ProfileView: View {
                                     .fill(Color.purplePrimary)
                                     .frame(maxWidth: .infinity, minHeight: 32)
                                     .overlay(
-                                        Text("Add friends")
+                                        Text("Add Friends")
                                             .foregroundColor(Color.whitePrimary)
                                             .font(.custom("Inter24pt-SemiBold", size: 16))
                                     )
@@ -235,7 +235,7 @@ struct ProfileView: View {
                                     .fill(Color("3D4399"))
                                     .frame(maxWidth: .infinity, minHeight: 32)
                                     .overlay(
-                                        Text("Edit profile")
+                                        Text("Edit Profile")
                                             .foregroundColor(Color.whitePrimary)
                                             .font(.custom("Inter24pt-SemiBold", size: 16))
                                     )
