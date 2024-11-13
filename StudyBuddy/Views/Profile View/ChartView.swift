@@ -10,36 +10,42 @@ import Charts
 
 struct ChartView: View {
     var height: Int = 250
-    var days: Int = 7
     
-    @State var ChartData: [HistoryChartData]
+    @Binding var daysToShow: Int
     
-    init(height: Int = 250, days: Int = 7) {
-        self.height = height
-        self.days = days
-        
-        _ChartData = State(initialValue: HistoryChartData.mockData(days))
-        
-    }
-          
+    @State private var chartData: [HistoryChartData] = []
+    
     var body: some View {
         Chart {
-            ForEach(ChartData, id: \.id) { sessionHistory in
+            ForEach(chartData, id: \.id) { sessionHistory in
                 BarMark(
                     x: .value("Date", sessionHistory.date),
                     y: .value("Session Length", sessionHistory.minutesStudied)
-                    
                 )
-                .foregroundStyle(Color("3D4399"))
+                .foregroundStyle(Color.purplePrimary)
                 
             }
         }
         .frame(height: CGFloat(height))
-        
+        .onAppear {
+            chartData = HistoryChartData.mockData(daysToShow)
+            
+        }
+        .onChange(of: daysToShow) {
+            chartData = HistoryChartData.mockData(daysToShow)
+            
+        }
     }
 }
 
 #Preview {
-    ChartView()
+    @Previewable @State var daysToShow: Int = 10
     
+    let timer = Timer.publish(every: 5, on: .main, in: .common).autoconnect()
+    
+    ChartView(daysToShow: $daysToShow)
+        .onReceive(timer) { _ in
+            daysToShow = Int.random(in: 1 ... 10)
+            
+        }
 }
