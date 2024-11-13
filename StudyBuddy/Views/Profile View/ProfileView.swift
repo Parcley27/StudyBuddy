@@ -88,11 +88,13 @@ struct ShareIcon: View {
 }
 
 struct ProfileView: View {
+    @State private var profileData = ProfileData.mockData()
+    
     @State private var isEditProfilePresented = false
     @State private var isAddFriendsPresented = false
     
-    @State var chartRange: String = "week"
-    @State var chartDayRange: Int = 7
+    @State private var chartRange: String = "week"
+    @State private var chartDayRange: Int = 7
     
     var body: some View {
         NavigationStack {
@@ -149,20 +151,23 @@ struct ProfileView: View {
                             .padding()
                             
                             VStack(alignment: .leading) {
-                                Text("Pierce Oxley")
+                                Text(profileData.name)
 //                                    .font(.title)
                                     .font(.custom("Inter24pt-Bold", size: 20))
-                                Text("@greenpowderranger")
+                                
+                                Text("@\(profileData.username)")
                                     .font(.custom("Inter24pt-Regular", size: 16))
                                 
 //                                Rectangle()
 //                                    .fill(Color("3D4399"))
 //                                    .frame(maxWidth: .infinity)
 //                                    .frame(height: 1)
+                                
                                 HStack(alignment: .top) {
-                                    StatsView("30", "⭐", "Level")
-                                    StatsView("71", "🔥", "Streak")
-                                    StatsView("61", "⏰", "Hours")
+                                    StatsView(String(profileData.level), "⭐", "Level")
+                                    StatsView(String(profileData.streak), "🔥", "Streak")
+                                    StatsView(String(profileData.totalHours), "⏰", "Hours")
+                                    
                                 }
 //                                .padding(.top, -5)
                             }
@@ -180,18 +185,21 @@ struct ProfileView: View {
                             .overlay(
                                 HStack {
                                     VStack(alignment: .leading, spacing: 2) {
-                                        Text("Scholar")
+                                        Text(profileData.rank)
                                             .font(.custom("Inter24pt-SemiBold", size: 16))
                                             .foregroundColor(.primary)
+                                        
                                         Text("Rank")
                                             .font(.custom("Inter24pt-Regular", size: 13))
                                             .foregroundColor(.secondary)
+                                        
                                     }
                                     .padding(.leading, 30)
                                     VStack(alignment: .leading, spacing: 2) {
-                                        Text("🎓")
+                                        Text(profileData.rankEmoji)
                                             .font(.custom("Inter24pt-SemiBold", size: 30))
                                             .foregroundColor(.primary)
+                                        
                                     }
                                     .frame(maxHeight: .infinity, alignment: .center)
 
@@ -201,12 +209,15 @@ struct ProfileView: View {
                                         Text("Something")
                                             .font(.custom("Inter24pt-SemiBold", size: 16))
                                             .foregroundColor(.primary)
+                                        
                                         Text("Something")
                                             .font(.custom("Inter24pt-Regular", size: 13))
                                             .foregroundColor(.secondary)
+                                        
                                     }
                                     .padding(.trailing, 30) // Padding from the right edge of the rectangle
                                     .frame(maxHeight: .infinity, alignment: .center)
+                                    
                                 }
                             )
                             .padding(.bottom)
@@ -214,6 +225,7 @@ struct ProfileView: View {
                         HStack(spacing: 10) {
                             Button(action: {
                                 isAddFriendsPresented = true
+                                
                             }) {
                                 Capsule(style: .continuous)
                                     .fill(Color.purplePrimary)
@@ -222,14 +234,17 @@ struct ProfileView: View {
                                         Text("Add Friends")
                                             .foregroundColor(Color.whitePrimary)
                                             .font(.custom("Inter24pt-SemiBold", size: 16))
+                                        
                                     )
                             }
                             .fullScreenCover(isPresented: $isAddFriendsPresented) {
                                 AddFriendsView()
+                                
                             }
 
                             Button(action: {
                                 isEditProfilePresented = true
+                                
                             }) {
                                 Capsule(style: .continuous)
                                     .fill(Color("3D4399"))
@@ -238,10 +253,12 @@ struct ProfileView: View {
                                         Text("Edit Profile")
                                             .foregroundColor(Color.whitePrimary)
                                             .font(.custom("Inter24pt-SemiBold", size: 16))
+                                        
                                     )
                             }
                             .fullScreenCover(isPresented: $isEditProfilePresented) {
                                 EditProfileView()
+                                
                             }
                         }
                         .padding(.horizontal) // spacing between buttons and edge of screen
@@ -254,10 +271,10 @@ struct ProfileView: View {
                                     .foregroundStyle(Color.greyPrimary)
                                     .padding(.bottom, 1)
                                 
-                                Text("Hi everyone! My name is Pierce and I love horses, especially Polish ones. I also enjoy iOS development in my free time.")
+                                Text(profileData.aboutMe)
                                     .font(.custom("Inter24pt-Regular", size: 16))
                                 
-                                Text("Joined Apr 26, 2024 · 124 days ago")
+                                Text("Joined \(profileData.joinDate.mediumFormat) · \(profileData.joinDate.daysAgoDescription)")
                                     .font(.custom("Inter24pt-Regular", size: 14))
                                     .foregroundStyle(Color.greyPrimary)
                                     .padding(.top, 1)
@@ -287,10 +304,12 @@ struct ProfileView: View {
                                         Text("Week")
                                             .font(.custom("Inter24pt-Medium", size: 13))
                                             .foregroundColor(chartRange == "week" ? Color.black : Color.whitePrimary)
+                                        
                                     }
                                     .onTapGesture {
                                         chartRange = "week"
                                         chartDayRange = 7
+                                        
                                     }
                                     
                                     ZStack {
@@ -302,6 +321,7 @@ struct ProfileView: View {
                                         Text("Month")
                                             .font(.custom("Inter24pt-Medium", size: 13))
                                             .foregroundColor(chartRange == "month" ? Color.black : Color.whitePrimary)
+                                        
                                     }
                                     .onTapGesture {
                                         chartRange = "month"
@@ -318,10 +338,12 @@ struct ProfileView: View {
                                         Text("All Time")
                                             .font(.custom("Inter24pt-Medium", size: 13))
                                             .foregroundColor(chartRange == "all" ? Color.black : Color.whitePrimary)
+                                        
                                     }
                                     .onTapGesture {
                                         chartRange = "all"
                                         chartDayRange = 60
+                                        
                                     }
                                 }
                                 .padding(.bottom, 3)
@@ -334,14 +356,16 @@ struct ProfileView: View {
                                     Text("Average Time Studied")
                                         .font(.custom("Inter24pt-Regular", size: 13))
                                         .foregroundStyle(Color.secondary)
+                                    
                                 }
                                 
                                 ChartView(height: 120, daysToShow: $chartDayRange)
                                 
                             }
                             .padding(.horizontal, 35)
+                            
                         }
-//                        .padding()
+//                      .padding()
                         
                         Text("Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis pellentesque, mauris sit amet lacinia semper, sem libero tempus metus, quis pellentesque nulla quam id sem. Nam bibendum est a imperdiet fermentum. Integer sit amet risus risus. Nullam interdum pulvinar tellus, ac dictum arcu semper id. Quisque ornare eget nisi at pharetra. Nunc a eros eu augue accumsan sodales. Quisque vehicula nisi quis turpis cursus, et interdum dolor pulvinar. Duis ultricies rutrum nunc, ac consectetur justo venenatis id. Duis fringilla est lectus, nec mollis nunc consequat eu. Suspendisse ac justo venenatis, commodo ipsum in, cursus nunc. Quisque dictum nisl in nisl auctor, id feugiat turpis congue. Aliquam erat volutpat. Integer tincidunt hendrerit augue, quis feugiat felis porttitor vel. Proin non fringilla mauris, in vehicula massa. Nam est justo, viverra quis risus sed, placerat molestie urna. Etiam volutpat condimentum libero vel hendrerit.")
                             .padding()
@@ -369,6 +393,7 @@ struct ProfileView: View {
             .toolbar {
 //                ToolbarItem(placement: .topBarLeading) {
 //                    CloseIcon()
+//
 //                }
                 
                 ToolbarItem(placement: .topBarTrailing) {
@@ -383,7 +408,7 @@ struct ProfileView: View {
             }
             .toolbarBackground(
                 Color.backgroundPrimary.opacity(1)
-
+                
             )
 //            .toolbarBackgroundVisibility(.hidden)
             
