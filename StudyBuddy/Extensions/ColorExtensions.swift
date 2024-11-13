@@ -23,6 +23,18 @@ extension Color {
         self.init(.sRGB, red: red, green: green, blue: blue, opacity: 1.0)
         
     }
+    
+    static let whitePrimary = Color("#FFFFFF")
+    static let blackPrimary = Color("#000000")
+    
+    static let backgroundPrimary = Color("#1A1A1A")
+    
+    static let purplePrimary = Color("#3D4399")
+    static let purpleSecondary = Color("#282A3E")
+    
+    static let greyPrimary = Color("#7C7C7C")
+    static let greySecondary = Color("#77777A")
+    
 }
 
 // Usage:
