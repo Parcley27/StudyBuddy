@@ -99,7 +99,7 @@ struct ProfileView: View {
             ZStack {
                 Color.backgroundPrimary
                     .ignoresSafeArea()
-//                VStack {
+//                VStack { // Glow
 //                    ZStack {
 //                        Circle()
 //                            .fill(.blue)
@@ -122,11 +122,12 @@ struct ProfileView: View {
 //                            .blur(radius: 100)
 //                        
 //                    }
-                    
+//                    
 //                    Spacer()
 //                    
 //                }
-//                .ignoresSafeArea(.all)
+                
+                .ignoresSafeArea(.all)
                 
                 ScrollView {
                     LazyVStack {
@@ -169,7 +170,47 @@ struct ProfileView: View {
                             Spacer()
                             
                         }
+                        
+                        RoundedRectangle(cornerRadius: 10)
+                            .strokeBorder(Color.backgroundSecondary, lineWidth: 2)
+                            .frame(height: 60)
+                            .background(Color.clear)
+                            .cornerRadius(10)
+                            .padding(.horizontal, 16)
+                            .overlay(
+                                HStack {
+                                    VStack(alignment: .leading, spacing: 2) {
+                                        Text("Scholar")
+                                            .font(.custom("Inter24pt-SemiBold", size: 16))
+                                            .foregroundColor(.primary)
+                                        Text("Rank")
+                                            .font(.custom("Inter24pt-Regular", size: 13))
+                                            .foregroundColor(.secondary)
+                                    }
+                                    .padding(.leading, 30)
+                                    VStack(alignment: .leading, spacing: 2) {
+                                        Text("🎓")
+                                            .font(.custom("Inter24pt-SemiBold", size: 30))
+                                            .foregroundColor(.primary)
+                                    }
+                                    .frame(maxHeight: .infinity, alignment: .center)
 
+                                    Spacer()
+
+                                    VStack(alignment: .leading, spacing: 2) {
+                                        Text("Something")
+                                            .font(.custom("Inter24pt-SemiBold", size: 16))
+                                            .foregroundColor(.primary)
+                                        Text("Something")
+                                            .font(.custom("Inter24pt-Regular", size: 13))
+                                            .foregroundColor(.secondary)
+                                    }
+                                    .padding(.trailing, 30) // Padding from the right edge of the rectangle
+                                    .frame(maxHeight: .infinity, alignment: .center)
+                                }
+                            )
+                            .padding(.bottom)
+                        
                         HStack(spacing: 10) {
                             Button(action: {
                                 isAddFriendsPresented = true
@@ -203,7 +244,7 @@ struct ProfileView: View {
                                 EditProfileView()
                             }
                         }
-                        .padding(.horizontal)
+                        .padding(.horizontal) // spacing between buttons and edge of screen
                         
                         HStack(alignment: .center) {
                             VStack(alignment: .leading) {
@@ -230,11 +271,8 @@ struct ProfileView: View {
                         
                         ZStack {
                             RoundedRectangle(cornerRadius: 12)
+                                .strokeBorder(Color.backgroundSecondary, lineWidth: 2)
                                 .frame(width: screenBounds().width - 32, height: 230)
-                                .foregroundStyle(Color.greyPrimary)
-                            
-                            RoundedRectangle(cornerRadius: 10)
-                                .frame(width: screenBounds().width - 36, height: 226)
                                 .foregroundStyle(Color.backgroundPrimary)
                             
                             // Adding actual functionalty later, this is just a ui mock up for rn
@@ -242,35 +280,28 @@ struct ProfileView: View {
                                 HStack {
                                     ZStack {
                                         Capsule()
-                                            .frame(width: 65, height: 30)
-                                            .foregroundStyle(chartRange == "week" ? Color.whitePrimary : Color.greySecondary)
-                                        
-                                        Capsule()
-                                            .frame(width: 61, height: 26)
-                                            .foregroundStyle(chartRange == "week" ? Color.whitePrimary : Color.backgroundPrimary)
-                                        
+                                            .fill(chartRange == "week" ? Color.white : Color.clear)
+                                            .strokeBorder(chartRange == "week" ? Color.whitePrimary : Color.backgroundSecondary, lineWidth: 2)
+                                            .frame(width: 60, height: 30)
+
                                         Text("Week")
-                                            .font(.custom("Inter24pt-Regular", size: 16))
-                                            .foregroundStyle(chartRange == "week" ? Color.backgroundPrimary : Color.whitePrimary)
+                                            .font(.custom("Inter24pt-Medium", size: 13))
+                                            .foregroundColor(chartRange == "week" ? Color.black : Color.whitePrimary)
                                     }
                                     .onTapGesture {
                                         chartRange = "week"
                                         chartDayRange = 7
-                                        
                                     }
                                     
                                     ZStack {
                                         Capsule()
-                                            .frame(width: 75, height: 30)
-                                            .foregroundStyle(chartRange == "month" ? Color.whitePrimary : Color.greySecondary)
-                                        
-                                        Capsule()
-                                            .frame(width: 71, height: 26)
-                                            .foregroundStyle(chartRange == "month" ? Color.whitePrimary : Color.backgroundPrimary)
-                                        
+                                            .fill(chartRange == "month" ? Color.white : Color.clear)
+                                            .strokeBorder(chartRange == "month" ? Color.whitePrimary : Color.backgroundSecondary, lineWidth: 2)
+                                            .frame(width: 65, height: 30)
+
                                         Text("Month")
-                                            .font(.custom("Inter24pt-Regular", size: 16))
-                                            .foregroundStyle(chartRange == "month" ? Color.backgroundPrimary : Color.whitePrimary)
+                                            .font(.custom("Inter24pt-Medium", size: 13))
+                                            .foregroundColor(chartRange == "month" ? Color.black : Color.whitePrimary)
                                     }
                                     .onTapGesture {
                                         chartRange = "month"
@@ -280,41 +311,37 @@ struct ProfileView: View {
                                     
                                     ZStack {
                                         Capsule()
-                                            .frame(width: 85, height: 30)
-                                            .foregroundStyle(chartRange == "all" ? Color.whitePrimary : Color.greySecondary)
-                                        
-                                        Capsule()
-                                            .frame(width: 81, height: 26)
-                                            .foregroundStyle(chartRange == "all" ? Color.whitePrimary : Color.backgroundPrimary)
-                                        
+                                            .fill(chartRange == "all" ? Color.white : Color.clear)
+                                            .strokeBorder(chartRange == "all" ? Color.whitePrimary : Color.backgroundSecondary, lineWidth: 2)
+                                            .frame(width: 75, height: 30)
+
                                         Text("All Time")
-                                            .font(.custom("Inter24pt-Regular", size: 16))
-                                            .foregroundStyle(chartRange == "all" ? Color.backgroundPrimary : Color.whitePrimary)
+                                            .font(.custom("Inter24pt-Medium", size: 13))
+                                            .foregroundColor(chartRange == "all" ? Color.black : Color.whitePrimary)
                                     }
                                     .onTapGesture {
                                         chartRange = "all"
                                         chartDayRange = 60
-                                        
                                     }
                                 }
+                                .padding(.bottom, 3)
                                 
-                                VStack(alignment: .leading) {
+                                VStack(alignment: .leading, spacing: 2) {
                                     Text("4 Hrs, 20 Mins")
-                                        .font(.custom("Inter24pt-Bold", size: 16))
+                                        .font(.custom("Inter24pt-SemiBold", size: 16))
                                         .foregroundStyle(Color.whitePrimary)
                                     
                                     Text("Average Time Studied")
                                         .font(.custom("Inter24pt-Regular", size: 13))
-                                        .foregroundStyle(Color.greySecondary)
-                                    
+                                        .foregroundStyle(Color.secondary)
                                 }
                                 
                                 ChartView(height: 120, daysToShow: $chartDayRange)
                                 
                             }
-                            .padding(.horizontal)
+                            .padding(.horizontal, 35)
                         }
-                        .padding()
+//                        .padding()
                         
                         Text("Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis pellentesque, mauris sit amet lacinia semper, sem libero tempus metus, quis pellentesque nulla quam id sem. Nam bibendum est a imperdiet fermentum. Integer sit amet risus risus. Nullam interdum pulvinar tellus, ac dictum arcu semper id. Quisque ornare eget nisi at pharetra. Nunc a eros eu augue accumsan sodales. Quisque vehicula nisi quis turpis cursus, et interdum dolor pulvinar. Duis ultricies rutrum nunc, ac consectetur justo venenatis id. Duis fringilla est lectus, nec mollis nunc consequat eu. Suspendisse ac justo venenatis, commodo ipsum in, cursus nunc. Quisque dictum nisl in nisl auctor, id feugiat turpis congue. Aliquam erat volutpat. Integer tincidunt hendrerit augue, quis feugiat felis porttitor vel. Proin non fringilla mauris, in vehicula massa. Nam est justo, viverra quis risus sed, placerat molestie urna. Etiam volutpat condimentum libero vel hendrerit.")
                             .padding()
@@ -353,7 +380,7 @@ struct ProfileView: View {
                 }
             }
             .toolbarBackground(
-                Color.backgroundPrimary
+                Color.backgroundPrimary.opacity(1)
 
             )
 //            .toolbarBackgroundVisibility(.hidden)

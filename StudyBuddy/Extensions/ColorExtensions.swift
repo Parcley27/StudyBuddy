@@ -28,12 +28,14 @@ extension Color {
     static let blackPrimary = Color("#000000")
     
     static let backgroundPrimary = Color("#1A1A1A")
+    static let backgroundSecondary = Color("#3B3B3B")
     
     static let purplePrimary = Color("#3D4399")
     static let purpleSecondary = Color("#282A3E")
     
     static let greyPrimary = Color("#7C7C7C")
-    static let greySecondary = Color("#77777A")
+//    static let greySecondary = Color("#77777A")
+    // ^^ Use .secondary instead
     
 }
 
