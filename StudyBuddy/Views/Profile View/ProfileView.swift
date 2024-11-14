@@ -101,33 +101,33 @@ struct ProfileView: View {
             ZStack {
                 Color.backgroundPrimary
                     .ignoresSafeArea()
-//                VStack { // Glow
-//                    ZStack {
-//                        Circle()
-//                            .fill(.blue)
-//                            .frame(width: 200, height: 100)
-//                            .blur(radius: 100)
-//                        
-//                        Circle()
-//                            .fill(.purple)
-//                            .frame(width: 200, height: 100)
-//                            .blur(radius: 100)
-//                        
-//                        Circle()
-//                            .fill(.purple)
-//                            .frame(width: 200, height: 100)
-//                            .blur(radius: 100)
-//                        
-//                        Circle()
-//                            .fill(.blue)
-//                            .frame(width: 200, height: 100)
-//                            .blur(radius: 100)
-//                        
-//                    }
-//                    
-//                    Spacer()
-//                    
-//                }
+                VStack { // Glow
+                    ZStack {
+                        Circle()
+                            .fill(.blue)
+                            .frame(width: 200, height: 100)
+                            .blur(radius: 100)
+                        
+                        Circle()
+                            .fill(.purple)
+                            .frame(width: 200, height: 100)
+                            .blur(radius: 100)
+                        
+                        Circle()
+                            .fill(.purple)
+                            .frame(width: 200, height: 100)
+                            .blur(radius: 100)
+                        
+                        Circle()
+                            .fill(.blue)
+                            .frame(width: 200, height: 100)
+                            .blur(radius: 100)
+                        
+                    }
+                    
+                    Spacer()
+                    
+                }
                 
                 .ignoresSafeArea(.all)
                 
@@ -289,7 +289,7 @@ struct ProfileView: View {
                         ZStack {
                             RoundedRectangle(cornerRadius: 12)
                                 .strokeBorder(Color.backgroundSecondary, lineWidth: 2)
-                                .frame(width: screenBounds().width - 32, height: 230)
+                                .frame(width: screenBounds().width - 32, height: 235)
                                 .foregroundStyle(Color.backgroundPrimary)
                             
                             // Adding actual functionalty later, this is just a ui mock up for rn
@@ -302,7 +302,7 @@ struct ProfileView: View {
                                             .frame(width: 60, height: 30)
 
                                         Text("Week")
-                                            .font(.custom("Inter24pt-Medium", size: 13))
+                                            .font(.custom("Inter24pt-Medium", size: 13 ))
                                             .foregroundColor(chartRange == "week" ? Color.black : Color.whitePrimary)
                                         
                                     }
@@ -350,7 +350,7 @@ struct ProfileView: View {
                                 
                                 VStack(alignment: .leading, spacing: 2) {
                                     Text("4 Hrs, 20 Mins")
-                                        .font(.custom("Inter24pt-SemiBold", size: 16))
+                                        .font(.custom("Inter24pt-SemiBold", size: 20))
                                         .foregroundStyle(Color.whitePrimary)
                                     
                                     Text("Average Time Studied")
@@ -410,7 +410,7 @@ struct ProfileView: View {
                 Color.backgroundPrimary.opacity(1)
                 
             )
-//            .toolbarBackgroundVisibility(.hidden)
+            .toolbarBackgroundVisibility(.hidden)
             
         }
     }
