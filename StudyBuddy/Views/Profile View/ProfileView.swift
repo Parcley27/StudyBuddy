@@ -118,40 +118,49 @@ struct ProfileView: View {
     @State private var chartRange: String = "week"
     @State private var chartDayRange: Int = 7
     
+    @AppStorage("doVisualEffects") var doVisualEffects: Bool = true
+    @AppStorage("preferredTheme") var preferredTheme: String = "Default"
+    
     var body: some View {
         NavigationStack {
             ZStack {
-                Color.backgroundPrimary
-                    .ignoresSafeArea()
-                
-                VStack { // Glow
-                    ZStack {
-                        Circle()
-                            .fill(.blue)
-                            .frame(width: 200, height: 100)
-                            .blur(radius: 100)
-                        
-                        Circle()
-                            .fill(.purple)
-                            .frame(width: 200, height: 100)
-                            .blur(radius: 100)
-                        
-                        Circle()
-                            .fill(.purple)
-                            .frame(width: 200, height: 100)
-                            .blur(radius: 100)
-                        
-                        Circle()
-                            .fill(.blue)
-                            .frame(width: 200, height: 100)
-                            .blur(radius: 100)
-                        
-                    }
-                    
-                    Spacer()
+                if preferredTheme == "Default" {
+                    Color.backgroundPrimary
+                        .ignoresSafeArea()
                     
                 }
-                .ignoresSafeArea(.all)
+                
+                if doVisualEffects {
+                    VStack { // Glow
+                        ZStack {
+                            Circle()
+                                .fill(.blue)
+                                .frame(width: 200, height: 100)
+                                .blur(radius: 100)
+                            
+                            Circle()
+                                .fill(.purple)
+                                .frame(width: 200, height: 100)
+                                .blur(radius: 100)
+                            
+                            Circle()
+                                .fill(.purple)
+                                .frame(width: 200, height: 100)
+                                .blur(radius: 100)
+                            
+                            Circle()
+                                .fill(.blue)
+                                .frame(width: 200, height: 100)
+                                .blur(radius: 100)
+                            
+                        }
+                        
+                        Spacer()
+                        
+                    }
+                    .ignoresSafeArea(.all)
+                    
+                }
                 
                 ScrollView {
                     LazyVStack {
@@ -409,31 +418,33 @@ struct ProfileView: View {
                     }
                 }
                 
-                VStack {
-                    Rectangle()
-                        .frame(maxWidth: .infinity, maxHeight: 100)
-                        .foregroundStyle(.clear)
-                        .background(VisualEffectBlur())
-                        .mask(
-                            LinearGradient(
-                                gradient: Gradient(stops: [
-                                    .init(color: .black.opacity(1), location: 0.3), // Full blur at the top
-                                    .init(color: .black.opacity(0.95), location: 0.4),
-                                    .init(color: .black.opacity(0.8), location: 0.5),
-                                    .init(color: .black.opacity(0.5), location: 0.8),
-                                    .init(color: .black.opacity(0), location: 1.0) // Fade out slowly
-                                ]),
-                                startPoint: .top,
-                                endPoint: .bottom
+                // Top edge blur out
+                if doVisualEffects {
+                    VStack {
+                        Rectangle()
+                            .frame(maxWidth: .infinity, maxHeight: 100)
+                            .foregroundStyle(.clear)
+                            .background(VisualEffectBlur())
+                            .mask(
+                                LinearGradient(
+                                    gradient: Gradient(stops: [
+                                        .init(color: .black.opacity(1), location: 0.3), // Full blur at the top
+                                        .init(color: .black.opacity(0.95), location: 0.4),
+                                        .init(color: .black.opacity(0.8), location: 0.5),
+                                        .init(color: .black.opacity(0.5), location: 0.8),
+                                        .init(color: .black.opacity(0), location: 1.0) // Fade out slowly
+                                    ]),
+                                    startPoint: .top,
+                                    endPoint: .bottom
+                                )
                             )
-                        )
-                    
-                    Spacer()
+                        
+                        Spacer()
+                        
+                    }
+                    .edgesIgnoringSafeArea(.all)
                     
                 }
-                .edgesIgnoringSafeArea(.all)
-                
-                
             }
             //.navigationTitle("Profile")
             //.navigationBarTitleDisplayMode(.inline)
@@ -457,7 +468,7 @@ struct ProfileView: View {
                 Color.backgroundPrimary.opacity(1)
                 
             )
-            .toolbarBackgroundVisibility(.hidden)
+            .toolbarBackgroundVisibility(doVisualEffects ? .hidden : .automatic)
             
         }
     }
