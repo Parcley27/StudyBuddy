@@ -16,8 +16,11 @@ struct SettingsView: View {
     
     var body: some View {
         ZStack {
-            Color.backgroundPrimary
-                .ignoresSafeArea()
+            if preferredTheme == "Default" {
+                Color.backgroundPrimary
+                    .ignoresSafeArea()
+                
+            }
             
             ScrollView {
                 Section("Appearance") {
