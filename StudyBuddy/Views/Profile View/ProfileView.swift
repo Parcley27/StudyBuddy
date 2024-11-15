@@ -45,9 +45,11 @@ struct CloseIcon: View {
                     .renderingMode(.template)
                     .foregroundColor(.white)
             }
+            
         } else {
             Text("Image not found")
                 .foregroundColor(.red)
+            
         }
     }
 }
@@ -60,11 +62,14 @@ struct SettingsIcon: View {
                     Image(uiImage: image)
                         .renderingMode(.template)
                         .foregroundColor(.white)
+                    
                 }
             }
+            
         } else {
             Text("Image not found")
                 .foregroundColor(.red)
+            
         }
     }
 }
@@ -78,12 +83,29 @@ struct ShareIcon: View {
                         .renderingMode(.template)
                         .foregroundColor(Color.whitePrimary)
                         .padding(.bottom, 1) // Adjust for slightly lower SVG
+                    
                 }
             } else {
                 Text("Image not found")
                     .foregroundColor(.red)
+                
             }
         }
+    }
+}
+
+struct VisualEffectBlur: UIViewRepresentable {
+    var effect: UIBlurEffect.Style = .regular
+    
+    func makeUIView(context: Context) -> UIVisualEffectView {
+        let view = UIVisualEffectView(effect: UIBlurEffect(style: effect))
+        return view
+        
+    }
+    
+    func updateUIView(_ uiView: UIVisualEffectView, context: Context) {
+        uiView.effect = UIBlurEffect(style: effect)
+        
     }
 }
 
@@ -101,6 +123,7 @@ struct ProfileView: View {
             ZStack {
                 Color.backgroundPrimary
                     .ignoresSafeArea()
+                
                 VStack { // Glow
                     ZStack {
                         Circle()
@@ -128,7 +151,6 @@ struct ProfileView: View {
                     Spacer()
                     
                 }
-                
                 .ignoresSafeArea(.all)
                 
                 ScrollView {
@@ -386,6 +408,31 @@ struct ProfileView: View {
                         
                     }
                 }
+                
+                VStack {
+                    Rectangle()
+                        .frame(maxWidth: .infinity, maxHeight: 100)
+                        .foregroundStyle(.clear)
+                        .background(VisualEffectBlur())
+                        .mask(
+                            LinearGradient(
+                                gradient: Gradient(stops: [
+                                    .init(color: .black.opacity(1), location: 0.3), // Full blur at the top
+                                    .init(color: .black.opacity(0.95), location: 0.4),
+                                    .init(color: .black.opacity(0.8), location: 0.5),
+                                    .init(color: .black.opacity(0.5), location: 0.8),
+                                    .init(color: .black.opacity(0), location: 1.0) // Fade out slowly
+                                ]),
+                                startPoint: .top,
+                                endPoint: .bottom
+                            )
+                        )
+                    
+                    Spacer()
+                    
+                }
+                .edgesIgnoringSafeArea(.all)
+                
                 
             }
             //.navigationTitle("Profile")
