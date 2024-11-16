@@ -112,14 +112,16 @@ struct VisualEffectBlur: UIViewRepresentable {
 struct ProfileView: View {
     @State private var profileData = ProfileData.mockData()
     
-    @State private var isEditProfilePresented = false
-    @State private var isAddFriendsPresented = false
+    @AppStorage("doVisualEffects") var doVisualEffects: Bool = true
+    @AppStorage("preferredTheme") var preferredTheme: String = "Default"
+    
+    @State private var isEditProfilePresented: Bool = false
+    @State private var isAddFriendsPresented: Bool = false
+    
+    @State var mainID: Int?
     
     @State private var chartRange: String = "week"
     @State private var chartDayRange: Int = 7
-    
-    @AppStorage("doVisualEffects") var doVisualEffects: Bool = true
-    @AppStorage("preferredTheme") var preferredTheme: String = "Default"
     
     var body: some View {
         NavigationStack {
@@ -428,11 +430,8 @@ struct ProfileView: View {
                             .mask(
                                 LinearGradient(
                                     gradient: Gradient(stops: [
-                                        .init(color: .black.opacity(1), location: 0.3), // Full blur at the top
-                                        .init(color: .black.opacity(0.95), location: 0.4),
-                                        .init(color: .black.opacity(0.8), location: 0.5),
-                                        .init(color: .black.opacity(0.5), location: 0.8),
-                                        .init(color: .black.opacity(0), location: 1.0) // Fade out slowly
+                                        .init(color: .black.opacity(1), location: 0), // Full blur at the top
+                                        .init(color: .black.opacity(0.00), location: 1.0) // Fade out slowly
                                     ]),
                                     startPoint: .top,
                                     endPoint: .bottom
