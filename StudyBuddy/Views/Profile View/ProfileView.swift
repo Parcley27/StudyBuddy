@@ -349,27 +349,27 @@ struct ProfileView: View {
             }
             //.navigationTitle("Profile")
             //.navigationBarTitleDisplayMode(.inline)
-//            .toolbar {
-////                ToolbarItem(placement: .topBarLeading) {
-////                    CloseIconView()
-////
-////                }
-//                
-//                ToolbarItem(placement: .topBarTrailing) {
-//                    ShareIconView()
-//                    
+            .toolbar {
+//                ToolbarItem(placement: .topBarLeading) {
+//                    CloseIconView()
+//
 //                }
-//                
-//                ToolbarItem(placement: .topBarTrailing) {
-//                    SettingsIconView()
-//                    
-//                }
-//            }
-//            .toolbarBackground(
-//                Color.backgroundPrimary.opacity(1)
-//                
-//            )
-//            .toolbarBackgroundVisibility(doVisualEffects ? .hidden : .automatic)
+                
+                ToolbarItem(placement: .topBarTrailing) {
+                    ShareIconView()
+                    
+                }
+                
+                ToolbarItem(placement: .topBarTrailing) {
+                    SettingsIconView()
+                    
+                }
+            }
+            .toolbarBackground(
+                Color.backgroundPrimary.opacity(1)
+                
+            )
+            .toolbarBackgroundVisibility(doVisualEffects ? .hidden : .automatic)
             
         }
     }
