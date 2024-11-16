@@ -47,12 +47,13 @@ struct ChartView: View {
         .chartXAxis {
             if daysToShow <= 7 {
                 AxisMarks(values: chartData.map { $0.date }) { date in
-                    AxisTick()
-
-                    AxisValueLabel(format: .dateTime.weekday())
-                    
+                    AxisValueLabel {
+                        if let dateValue = date.as(Date.self) {
+                            Text(dateValue, format: .dateTime.weekday())
+                                .offset(x:-10)
+                        }
+                    }
                 }
-                
             } else if daysToShow <= 31 {
                 AxisMarks(values: chartData.indices.filter { index in
                     index % 5 == 0 || index == (daysToShow - 1)
