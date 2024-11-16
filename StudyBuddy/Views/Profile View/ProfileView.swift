@@ -210,7 +210,7 @@ struct ProfileView: View {
                         }
                         
                         RoundedRectangle(cornerRadius: 10)
-                            .strokeBorder(Color.backgroundSecondary, lineWidth: 2)
+                            .strokeBorder(Color.backgroundSecondary, lineWidth: 1)
                             .frame(height: 60)
                             .background(Color.clear)
                             .cornerRadius(10)
@@ -321,7 +321,7 @@ struct ProfileView: View {
                         
                         ZStack {
                             RoundedRectangle(cornerRadius: 12)
-                                .strokeBorder(Color.backgroundSecondary, lineWidth: 2)
+                                .strokeBorder(Color.backgroundSecondary, lineWidth: 1)
                                 .frame(width: screenBounds().width - 32, height: 235)
                                 .foregroundStyle(Color.backgroundPrimary)
                             
@@ -331,7 +331,7 @@ struct ProfileView: View {
                                     ZStack {
                                         Capsule()
                                             .fill(chartRange == "week" ? Color.white : Color.clear)
-                                            .strokeBorder(chartRange == "week" ? Color.whitePrimary : Color.backgroundSecondary, lineWidth: 2)
+                                            .strokeBorder(chartRange == "week" ? Color.whitePrimary : Color.backgroundSecondary, lineWidth: 1)
                                             .frame(width: 60, height: 30)
 
                                         Text("Week")
@@ -348,7 +348,7 @@ struct ProfileView: View {
                                     ZStack {
                                         Capsule()
                                             .fill(chartRange == "month" ? Color.white : Color.clear)
-                                            .strokeBorder(chartRange == "month" ? Color.whitePrimary : Color.backgroundSecondary, lineWidth: 2)
+                                            .strokeBorder(chartRange == "month" ? Color.whitePrimary : Color.backgroundSecondary, lineWidth: 1)
                                             .frame(width: 65, height: 30)
 
                                         Text("Month")
@@ -365,7 +365,7 @@ struct ProfileView: View {
                                     ZStack {
                                         Capsule()
                                             .fill(chartRange == "all" ? Color.white : Color.clear)
-                                            .strokeBorder(chartRange == "all" ? Color.whitePrimary : Color.backgroundSecondary, lineWidth: 2)
+                                            .strokeBorder(chartRange == "all" ? Color.whitePrimary : Color.backgroundSecondary, lineWidth: 1)
                                             .frame(width: 75, height: 30)
 
                                         Text("All Time")

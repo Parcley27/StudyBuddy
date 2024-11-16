@@ -28,7 +28,7 @@ extension Color {
     static let blackPrimary = Color("#000000")
     
     static let backgroundPrimary = Color("#1A1A1A")
-    static let backgroundSecondary = Color("#3B3B3B")
+    static let backgroundSecondary = Color("#626262")
     
     static let purplePrimary = Color("#3D4399")
     static let purpleSecondary = Color("#282A3E")
