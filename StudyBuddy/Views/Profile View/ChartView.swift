@@ -38,6 +38,27 @@ struct ChartView: View {
             chartData = HistoryChartData.mockData(daysToShow)
             
         }
+        .chartXAxis {
+            if daysToShow == 7 {
+                AxisMarks(values: chartData.map { $0.date }) { date in
+                    AxisValueLabel(format: .dateTime.weekday(), centered: true)
+                }
+            } else if daysToShow == 30 {
+                // Label every 5th bar for 30 days
+                AxisMarks(values: chartData.indices.filter { $0 % 5 == 0 }.map { chartData[$0].date }) { date in
+                    AxisValueLabel(format: .dateTime.month(.abbreviated).day(), centered: true)
+                }
+            } else if daysToShow == 60 {
+                // Label every 10th bar for 60 days
+                AxisMarks(values: chartData.indices.filter { $0 % 10 == 0 }.map { chartData[$0].date }) { date in
+                    AxisValueLabel(format: .dateTime.month(), centered: true)
+                }
+            } else {
+                AxisMarks(values: chartData.map { $0.date }) { date in
+                    AxisValueLabel(format: .dateTime.month(.narrow), centered: true)
+                }
+            }
+        }
     }
 }
 
