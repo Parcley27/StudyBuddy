@@ -52,6 +52,19 @@ extension Date {
         
     }
     
+    var daysAgo: Int {
+        let calendar = Calendar.current
+        let now = Date()
+        
+        guard let daysDifference = calendar.dateComponents([.day], from: self, to: now).day else {
+            return 0
+            
+        }
+        
+        return daysDifference
+        
+    }
+    
     var daysAgoDescription: String {
         let calendar = Calendar.current
         let now = Date()
