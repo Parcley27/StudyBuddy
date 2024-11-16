@@ -39,25 +39,55 @@ struct ChartView: View {
             
         }
         .chartXAxis {
-            if daysToShow == 7 {
+            if daysToShow <= 7 {
                 AxisMarks(values: chartData.map { $0.date }) { date in
-                    AxisValueLabel(format: .dateTime.weekday(), centered: true)
+                    AxisTick()
+
+                    AxisValueLabel(format: .dateTime.weekday())
+                    
                 }
-            } else if daysToShow == 30 {
-                // Label every 5th bar for 30 days
-                AxisMarks(values: chartData.indices.filter { $0 % 5 == 0 }.map { chartData[$0].date }) { date in
-                    AxisValueLabel(format: .dateTime.month(.abbreviated).day(), centered: true)
+                
+            } else if daysToShow <= 31 {
+                AxisMarks(values: chartData.indices.filter { index in
+                    index % 5 == 0 || index == (daysToShow - 1)
+                    
+                }.map { chartData[$0].date }) { date in
+                    AxisTick()
+                    
+                    AxisValueLabel(format: .dateTime.month(.abbreviated).day())
+                    
                 }
-            } else if daysToShow == 60 {
-                // Label every 10th bar for 60 days
-                AxisMarks(values: chartData.indices.filter { $0 % 10 == 0 }.map { chartData[$0].date }) { date in
-                    AxisValueLabel(format: .dateTime.month(), centered: true)
-                }
+                
             } else {
-                AxisMarks(values: chartData.map { $0.date }) { date in
-                    AxisValueLabel(format: .dateTime.month(.narrow), centered: true)
+                AxisMarks(values: chartData.indices.filter { index in
+                    Calendar.current.component(.day, from: chartData[index].date) == 1 || index == (daysToShow - 1)
+                    
+                }.map { chartData[$0].date }) { date in
+                    AxisTick()
+                    
+                    AxisValueLabel(format: .dateTime.month())
+                    
+                }
+                
+            }
+        }
+        .chartYAxis {
+            AxisMarks() { value in
+                AxisValueLabel {
+                    if let number = value.as(Double.self) {
+                        Text("\(Int(number))h")
+                        
+                    }
                 }
             }
+        }
+        .onAppear {
+            averageStudyTime = chartData.isEmpty ? 0.0 : Double(chartData.map { $0.minutesStudied }.reduce(0, +) / chartData.count)
+            
+        }
+        .onChange(of: daysToShow) {
+            averageStudyTime = chartData.isEmpty ? 0.0 : Double(chartData.map { $0.minutesStudied }.reduce(0, +) / chartData.count)
+            
         }
     }
 }
@@ -69,7 +99,7 @@ struct ChartView: View {
     
     ChartView(daysToShow: $daysToShow)
         .onReceive(timer) { _ in
-            daysToShow = Int.random(in: 1 ... 10)
+            daysToShow = Int.random(in: 5 ... 7)
             
         }
 }
