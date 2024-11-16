@@ -8,107 +8,6 @@
 import SwiftUI
 import Charts
 
-struct StatsView: View {
-    init(_ stat: String, _ emoji: String, _ caption: String) {
-        self.stat = stat
-        self.emoji = emoji
-        self.caption = caption
-        
-    }
-    
-    @State var stat: String
-    @State var emoji: String
-    @State var caption: String
-        
-    var body: some View {
-        VStack(alignment: .leading, spacing: 2) {
-            Text("\(stat) \(emoji)")
-                .font(.custom("Inter24pt-SemiBold", size: 20))
-            Text(caption)
-                .font(.custom("Inter24pt-Regular", size: 14))
-                .foregroundStyle(.secondary)
-            
-        }
-        .padding(.top, 1)
-        .frame(width: 70, alignment: .leading)
-        
-    }
-}
-
-struct CloseIcon: View {
-    var body: some View {
-        if let image = UIImage(named: "close")?.withConfiguration(UIImage.SymbolConfiguration(pointSize: 24, weight: .regular)) {
-            Button(action: {
-                print("Close button tapped")
-            }) {
-                Image(uiImage: image)
-                    .renderingMode(.template)
-                    .foregroundColor(.white)
-            }
-            
-        } else {
-            Text("Image not found")
-                .foregroundColor(.red)
-            
-        }
-    }
-}
-
-struct SettingsIcon: View {
-    var body: some View {
-        if let image = UIImage(named: "settings")?.withConfiguration(UIImage.SymbolConfiguration(pointSize: 20, weight: .regular)) {
-            ZStack {
-                NavigationLink(destination: SettingsView()) {
-                    Image(uiImage: image)
-                        .renderingMode(.template)
-                        .foregroundColor(.white)
-                    
-                }
-            }
-            
-        } else {
-            Text("Image not found")
-                .foregroundColor(.red)
-            
-        }
-    }
-}
-
-struct ShareIcon: View {
-    var body: some View {
-        ShareLink(item: "Hello, Profile Sharing!") {
-            if let image = UIImage(named: "ios_share")?.withConfiguration(UIImage.SymbolConfiguration(pointSize: 20, weight: .regular)) {
-                ZStack {
-                    Image(uiImage: image)
-                        .renderingMode(.template)
-                        .foregroundColor(Color.whitePrimary)
-                        .padding(.bottom, 1) // Adjust for slightly lower SVG
-                    
-                }
-            } else {
-                Text("Image not found")
-                    .foregroundColor(.red)
-                
-            }
-        }
-    }
-}
-
-struct VisualEffectBlur: UIViewRepresentable {
-    var effect: UIBlurEffect.Style = .regular
-    
-    func makeUIView(context: Context) -> UIVisualEffectView {
-        let view = UIVisualEffectView(effect: UIBlurEffect(style: effect))
-        return view
-        
-    }
-    
-    func updateUIView(_ uiView: UIVisualEffectView, context: Context) {
-        uiView.effect = UIBlurEffect(style: effect)
-        
-    }
-}
-
 struct ProfileView: View {
     @State private var profileData = ProfileData.mockData()
     
@@ -426,7 +325,7 @@ struct ProfileView: View {
                         Rectangle()
                             .frame(maxWidth: .infinity, maxHeight: 100)
                             .foregroundStyle(.clear)
-                            .background(VisualEffectBlur())
+                            .background(BlurEffectView())
                             .mask(
                                 LinearGradient(
                                     gradient: Gradient(stops: [
@@ -449,17 +348,17 @@ struct ProfileView: View {
             //.navigationBarTitleDisplayMode(.inline)
             .toolbar {
 //                ToolbarItem(placement: .topBarLeading) {
-//                    CloseIcon()
+//                    CloseIconView()
 //
 //                }
                 
                 ToolbarItem(placement: .topBarTrailing) {
-                    ShareIcon()
+                    ShareIconView()
                     
                 }
                 
                 ToolbarItem(placement: .topBarTrailing) {
-                    SettingsIcon()
+                    SettingsIconView()
                     
                 }
             }
