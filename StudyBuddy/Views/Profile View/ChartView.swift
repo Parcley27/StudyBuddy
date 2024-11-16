@@ -12,11 +12,17 @@ struct ChartView: View {
     var height: Int = 250
     
     @Binding var daysToShow: Int
+    @Binding var averageStudyTime: Double
     
     @State private var chartData: [HistoryChartData] = []
     
     var body: some View {
         Chart {
+            RuleMark(y: .value("Average", (averageStudyTime / 60.0)))
+                .foregroundStyle(Color.purpleSecondary)
+                .lineStyle(StrokeStyle(lineWidth: 1))
+            
+            
             ForEach(chartData, id: \.id) { sessionHistory in
                 BarMark(
                     x: .value("Date", sessionHistory.date, unit: .day),
@@ -93,11 +99,12 @@ struct ChartView: View {
 }
 
 #Preview {
-    @Previewable @State var daysToShow: Int = 10
+    @Previewable @State var daysToShow: Int = 7
+    @Previewable @State var averageStudyTime: Double = 0
     
     let timer = Timer.publish(every: 5, on: .main, in: .common).autoconnect()
     
-    ChartView(daysToShow: $daysToShow)
+    ChartView(daysToShow: $daysToShow, averageStudyTime: $averageStudyTime)
         .onReceive(timer) { _ in
             daysToShow = Int.random(in: 5 ... 7)
             

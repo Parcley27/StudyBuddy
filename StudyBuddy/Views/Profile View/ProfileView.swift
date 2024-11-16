@@ -16,11 +16,11 @@ struct ProfileView: View {
     
     @State private var isEditProfilePresented: Bool = false
     @State private var isAddFriendsPresented: Bool = false
-    
-    @State var mainID: Int?
-    
+        
     @State private var chartRange: String = "week"
     @State private var chartDayRange: Int = 7
+    
+    @State var averageStudyTime: Double = 0
     
     var body: some View {
         NavigationStack {
@@ -274,14 +274,17 @@ struct ProfileView: View {
                                     }
                                     .onTapGesture {
                                         chartRange = "all"
-                                        chartDayRange = 60
+                                        chartDayRange = profileData.joinDate.daysAgo
                                         
                                     }
                                 }
                                 .padding(.bottom, 3)
                                 
                                 VStack(alignment: .leading, spacing: 2) {
-                                    Text("4 Hrs, 20 Mins")
+                                    let hours = Int(averageStudyTime / 60)
+                                    let minutes = Int(averageStudyTime) % 60
+                                    
+                                    Text("\(hours)\(hours == 1 ? "hr" : "hrs") \(minutes)min")
                                         .font(.custom("Inter24pt-SemiBold", size: 20))
                                         .foregroundStyle(Color.whitePrimary)
                                     
@@ -291,7 +294,7 @@ struct ProfileView: View {
                                     
                                 }
                                 
-                                ChartView(height: 120, daysToShow: $chartDayRange)
+                                ChartView(height: 120, daysToShow: $chartDayRange, averageStudyTime: $averageStudyTime)
                                 
                             }
                             .padding(.horizontal, 35)
@@ -346,27 +349,27 @@ struct ProfileView: View {
             }
             //.navigationTitle("Profile")
             //.navigationBarTitleDisplayMode(.inline)
-            .toolbar {
-//                ToolbarItem(placement: .topBarLeading) {
-//                    CloseIconView()
-//
+//            .toolbar {
+////                ToolbarItem(placement: .topBarLeading) {
+////                    CloseIconView()
+////
+////                }
+//                
+//                ToolbarItem(placement: .topBarTrailing) {
+//                    ShareIconView()
+//                    
 //                }
-                
-                ToolbarItem(placement: .topBarTrailing) {
-                    ShareIconView()
-                    
-                }
-                
-                ToolbarItem(placement: .topBarTrailing) {
-                    SettingsIconView()
-                    
-                }
-            }
-            .toolbarBackground(
-                Color.backgroundPrimary.opacity(1)
-                
-            )
-            .toolbarBackgroundVisibility(doVisualEffects ? .hidden : .automatic)
+//                
+//                ToolbarItem(placement: .topBarTrailing) {
+//                    SettingsIconView()
+//                    
+//                }
+//            }
+//            .toolbarBackground(
+//                Color.backgroundPrimary.opacity(1)
+//                
+//            )
+//            .toolbarBackgroundVisibility(doVisualEffects ? .hidden : .automatic)
             
         }
     }
