@@ -55,18 +55,8 @@ struct HistoryChartData: Identifiable {
     let id = UUID()
     
     static func createData(_ length: Int) -> [HistoryChartData] {
-        var newData: [HistoryChartData] = []
-        
-        // Generate a random set of a full year of data in minutes
-        let calendar = Calendar.current
-        let startDate = calendar.date(from: DateComponents(year: 2024, month: 1, day: 1))!
-        for i in 0..<365 {
-            let date = calendar.date(byAdding: .day, value: i, to: startDate)!
-            newData.append(HistoryChartData(date: date, hoursStudied: (Int.random(in: 10...300)/60))) // data is originally in minutes
-        }
-        
-        // Take only last year of data
-        newData = Array(newData.prefix(365))
+        // Take only last year of data (sourced from profile)
+        let newData: [HistoryChartData] = Array(ProfileData.mock.studyData.prefix(365))
         
         // If length is small enough, that portion of the data is OK
         if length <= 31 {

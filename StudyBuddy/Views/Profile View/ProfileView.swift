@@ -9,7 +9,7 @@ import SwiftUI
 import Charts
 
 struct ProfileView: View {
-    @State private var profileData = ProfileData.mockData()
+    @State private var profileData = ProfileData.mock
     
     @AppStorage("doVisualEffects") var doVisualEffects: Bool = true
     @AppStorage("preferredTheme") var preferredTheme: String = "Default"
@@ -260,7 +260,7 @@ struct ProfileView: View {
                                         }
                                         .onTapGesture {
                                             chartRange = "all"
-                                            chartDayRange = profileData.joinDate.daysAgo
+                                            chartDayRange = 365
                                             
                                         }
                                     }
@@ -286,7 +286,6 @@ struct ProfileView: View {
                                     daysToShow: $chartDayRange,
                                     averageStudyTime: $averageStudyTime
                                 )
-                                .padding(.top,1)
                             }
                         }
                         .overlay(

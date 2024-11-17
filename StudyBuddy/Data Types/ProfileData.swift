@@ -21,8 +21,9 @@ struct ProfileData {
     var aboutMe: String
     
     var joinDate: Date
+    var studyData: [HistoryChartData]
     
-    static func mockData() -> ProfileData {
+    static let mock: ProfileData = {
         let mockName: String = "Pierce Oxley"
         let mockUsername: String = "greenpowderranger"
         
@@ -37,7 +38,17 @@ struct ProfileData {
         
         let mockJoinDate = Date.makeDate(years: 2024, months: 6, days: 21, hours: 12)
         
-        let mockData = ProfileData(
+        var newData: [HistoryChartData] = []
+        
+        // Generate a random set of a full year of data in minutes
+        let calendar = Calendar.current
+        let startDate = calendar.date(from: DateComponents(year: 2024, month: 1, day: 1))!
+        for i in 0..<365 {
+            let date = calendar.date(byAdding: .day, value: i, to: startDate)!
+            newData.append(HistoryChartData(date: date, hoursStudied: (Int.random(in: 10...300)/60))) // data is originally in minutes
+        }
+        
+        return ProfileData(
             name: mockName,
             username: mockUsername,
             
@@ -50,12 +61,9 @@ struct ProfileData {
             
             aboutMe: mockAboutMe,
             
-            joinDate: mockJoinDate
-            
+            joinDate: mockJoinDate,
+            studyData: newData
         )
-        
-        return mockData
-            
-    }
+    }()
     
 }
