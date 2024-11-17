@@ -208,109 +208,94 @@ struct ProfileView: View {
                             Spacer()
                             
                         }
-                        
-                        ZStack {
-                            RoundedRectangle(cornerRadius: 12)
-                                .strokeBorder(Color.backgroundSecondary, lineWidth: 1)
-                                .frame(width: screenBounds().width - 32, height: 235)
-                                .foregroundStyle(Color.backgroundPrimary)
-                            
-                            // Adding actual functionalty later, this is just a ui mock up for rn
+
+                        ZStack(alignment: .topLeading) {
                             VStack(alignment: .leading) {
-                                HStack {
-                                    ZStack {
-                                        Capsule()
-                                            .fill(chartRange == "week" ? Color.white : Color.clear)
-                                            .strokeBorder(chartRange == "week" ? Color.whitePrimary : Color.backgroundSecondary, lineWidth: 1)
-                                            .frame(width: 60, height: 30)
-
-                                        Text("Week")
-                                            .font(.custom("Inter24pt-Medium", size: 13 ))
-                                            .foregroundColor(chartRange == "week" ? Color.black : Color.whitePrimary)
+                                VStack(alignment: .leading) {
+                                    HStack {
+                                        ZStack {
+                                            Capsule()
+                                                .fill(chartRange == "week" ? Color.white : Color.clear)
+                                                .strokeBorder(chartRange == "week" ? Color.whitePrimary : Color.backgroundSecondary, lineWidth: 1)
+                                                .frame(width: 60, height: 30)
+                                            
+                                            Text("Week")
+                                                .font(.custom("Inter24pt-Medium", size: 13 ))
+                                                .foregroundColor(chartRange == "week" ? Color.black : Color.whitePrimary)
+                                            
+                                        }
+                                        .onTapGesture {
+                                            chartRange = "week"
+                                            chartDayRange = 7
+                                            
+                                        }
                                         
-                                    }
-                                    .onTapGesture {
-                                        chartRange = "week"
-                                        chartDayRange = 7
+                                        ZStack {
+                                            Capsule()
+                                                .fill(chartRange == "month" ? Color.white : Color.clear)
+                                                .strokeBorder(chartRange == "month" ? Color.whitePrimary : Color.backgroundSecondary, lineWidth: 1)
+                                                .frame(width: 65, height: 30)
+                                            
+                                            Text("Month")
+                                                .font(.custom("Inter24pt-Medium", size: 13))
+                                                .foregroundColor(chartRange == "month" ? Color.black : Color.whitePrimary)
+                                            
+                                        }
+                                        .onTapGesture {
+                                            chartRange = "month"
+                                            chartDayRange = 30
+                                            
+                                        }
                                         
+                                        ZStack {
+                                            Capsule()
+                                                .fill(chartRange == "all" ? Color.white : Color.clear)
+                                                .strokeBorder(chartRange == "all" ? Color.whitePrimary : Color.backgroundSecondary, lineWidth: 1)
+                                                .frame(width: 85, height: 30)
+                                            
+                                            Text("This Year")
+                                                .font(.custom("Inter24pt-Medium", size: 13))
+                                                .foregroundColor(chartRange == "all" ? Color.black : Color.whitePrimary)
+                                            
+                                        }
+                                        .onTapGesture {
+                                            chartRange = "all"
+                                            chartDayRange = profileData.joinDate.daysAgo
+                                            
+                                        }
                                     }
                                     
-                                    ZStack {
-                                        Capsule()
-                                            .fill(chartRange == "month" ? Color.white : Color.clear)
-                                            .strokeBorder(chartRange == "month" ? Color.whitePrimary : Color.backgroundSecondary, lineWidth: 1)
-                                            .frame(width: 65, height: 30)
-
-                                        Text("Month")
-                                            .font(.custom("Inter24pt-Medium", size: 13))
-                                            .foregroundColor(chartRange == "month" ? Color.black : Color.whitePrimary)
+                                    VStack(alignment: .leading, spacing: 2) {
+                                        let hours = Int(averageStudyTime / 60)
+                                        let minutes = Int(averageStudyTime) % 60
                                         
-                                    }
-                                    .onTapGesture {
-                                        chartRange = "month"
-                                        chartDayRange = 30
+                                        Text("\(hours)\(hours == 1 ? "hr" : "hrs") \(minutes)min")
+                                            .font(.custom("Inter24pt-SemiBold", size: 20))
+                                            .foregroundStyle(Color.whitePrimary)
                                         
-                                    }
-                                    
-                                    ZStack {
-                                        Capsule()
-                                            .fill(chartRange == "all" ? Color.white : Color.clear)
-                                            .strokeBorder(chartRange == "all" ? Color.whitePrimary : Color.backgroundSecondary, lineWidth: 1)
-                                            .frame(width: 75, height: 30)
-
-                                        Text("All Time")
-                                            .font(.custom("Inter24pt-Medium", size: 13))
-                                            .foregroundColor(chartRange == "all" ? Color.black : Color.whitePrimary)
-                                        
-                                    }
-                                    .onTapGesture {
-                                        chartRange = "all"
-                                        chartDayRange = profileData.joinDate.daysAgo
+                                        Text("Average Time Studied")
+                                            .font(.custom("Inter24pt-Regular", size: 13))
+                                            .foregroundStyle(Color.secondary)
                                         
                                     }
                                 }
-                                .padding(.bottom, 3)
-                                
-                                VStack(alignment: .leading, spacing: 2) {
-                                    let hours = Int(averageStudyTime / 60)
-                                    let minutes = Int(averageStudyTime) % 60
-                                    
-                                    Text("\(hours)\(hours == 1 ? "hr" : "hrs") \(minutes)min")
-                                        .font(.custom("Inter24pt-SemiBold", size: 20))
-                                        .foregroundStyle(Color.whitePrimary)
-                                    
-                                    Text("Average Time Studied")
-                                        .font(.custom("Inter24pt-Regular", size: 13))
-                                        .foregroundStyle(Color.secondary)
-                                    
-                                }
-                                
-                                ChartView(height: 120, daysToShow: $chartDayRange, averageStudyTime: $averageStudyTime)
-                                
+                                .padding(.horizontal)
+                                .padding(.top, 10)
+                                ChartView(
+                                    height: 125,
+                                    daysToShow: $chartDayRange,
+                                    averageStudyTime: $averageStudyTime
+                                )
                             }
-                            .padding(.horizontal, 35)
-                            
                         }
-//                      .padding()
-                        
-                        Text("Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis pellentesque, mauris sit amet lacinia semper, sem libero tempus metus, quis pellentesque nulla quam id sem. Nam bibendum est a imperdiet fermentum. Integer sit amet risus risus. Nullam interdum pulvinar tellus, ac dictum arcu semper id. Quisque ornare eget nisi at pharetra. Nunc a eros eu augue accumsan sodales. Quisque vehicula nisi quis turpis cursus, et interdum dolor pulvinar. Duis ultricies rutrum nunc, ac consectetur justo venenatis id. Duis fringilla est lectus, nec mollis nunc consequat eu. Suspendisse ac justo venenatis, commodo ipsum in, cursus nunc. Quisque dictum nisl in nisl auctor, id feugiat turpis congue. Aliquam erat volutpat. Integer tincidunt hendrerit augue, quis feugiat felis porttitor vel. Proin non fringilla mauris, in vehicula massa. Nam est justo, viverra quis risus sed, placerat molestie urna. Etiam volutpat condimentum libero vel hendrerit.")
-                            .padding()
-                        /*
-                            .onAppear() {
-                                // Display all fonts available to the app
-                                
-                                for family: String in UIFont.familyNames {
-                                    print(family)
-                                
-                                    for names: String in UIFont.fontNames(forFamilyName: family) {
-                                        print("-- \(names)")
-                                        
-                                    }
-                                }
-                            }
-                         */
+                        .overlay(
+                            RoundedRectangle(cornerRadius: 16)
+                                .stroke(Color.backgroundSecondary, lineWidth: 1)
+                        )
+                        .padding(.horizontal)
                         
                     }
+                    
                 }
                 
                 // Top edge blur out

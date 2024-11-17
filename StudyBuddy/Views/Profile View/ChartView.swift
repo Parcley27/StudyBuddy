@@ -9,105 +9,127 @@ import SwiftUI
 import Charts
 
 struct ChartView: View {
+    // Set graph colors (for gradient) and height
     var height: Int = 250
-    
+    var colors = [Color("E39FF6"), Color("710193"), Color.purple]
+
+    // Parameters
     @Binding var daysToShow: Int
     @Binding var averageStudyTime: Double
-    
-    @State private var chartData: [HistoryChartData] = []
-    
+        
     var body: some View {
-        Chart {
-            RuleMark(y: .value("Average", (averageStudyTime / 60.0)))
-                .foregroundStyle(Color.purpleSecondary)
-                .lineStyle(StrokeStyle(lineWidth: 1))
-            
-            
-            ForEach(chartData, id: \.id) { sessionHistory in
-                BarMark(
-                    x: .value("Date", sessionHistory.date, unit: .day),
-                    y: .value("Session Length", Double(sessionHistory.minutesStudied) / 60.0)
-                )
-                .cornerRadius(5)
-                .foregroundStyle(Color.purplePrimary)
-                // Lighter tips
-                //.foregroundStyle(Color.purplePrimary.gradient)
+        let chartData: [HistoryChartData] = HistoryChartData.createData(daysToShow)
+        // Color gradient to use
+        let curGradient = LinearGradient(
+            gradient: Gradient (
+                colors: [
+                    colors[0],
+                    colors[1],
+                    colors[2]
+                ]
+            ),
+            startPoint: .leading,
+            endPoint: .bottom
+        )
+        
+        VStack {
+            Chart {
                 
+                ForEach(chartData) { viewMonth in
+                    // Different x-axis units depending on range
+                    if daysToShow <= 7 {
+                        LineMark(
+                            x: .value("Day", viewMonth.date, unit: .weekday),
+                            y: .value("Hours Studied", viewMonth.hoursStudied)
+                        )
+                        .interpolationMethod(.catmullRom)
+                        .lineStyle(.init(lineWidth: 3))
+                        .foregroundStyle(curGradient)
+                    } else if daysToShow <= 31 {
+                        LineMark(
+                            x: .value("Date", viewMonth.date, unit: .day),
+                            y: .value("Hours Studied", viewMonth.hoursStudied)
+                        )
+                        .interpolationMethod(.catmullRom)
+                        .lineStyle(.init(lineWidth: 3))
+                        .foregroundStyle(curGradient)
+                    } else {
+                        LineMark(
+                            x: .value("Month", viewMonth.date, unit: .month),
+                            y: .value("Hours Studied", viewMonth.hoursStudied)
+                        )
+                        .interpolationMethod(.catmullRom)
+                        .lineStyle(.init(lineWidth: 3))
+                        .foregroundStyle(curGradient)
+                    }
+                    
+                    // Area under line graph: adjust for units
+                    if daysToShow <= 31 {
+                        AreaMark(x: .value("Day", viewMonth.date, unit: .weekday), y: .value("Hours Studied", viewMonth.hoursStudied))
+                            // Curved line
+                            .interpolationMethod(.catmullRom)
+                            .foregroundStyle(curGradient)
+                            .opacity(0.2)
+                    } else {
+                        AreaMark(x: .value("Month", viewMonth.date, unit: .month), y: .value("Hours Studied", viewMonth.hoursStudied))
+                            // Curved line
+                            .interpolationMethod(.catmullRom)
+                            .foregroundStyle(curGradient)
+                            .opacity(0.2)
+                    }
+                }
             }
-        }
-        .frame(height: CGFloat(height))
-        .onAppear {
-            chartData = HistoryChartData.mockData(daysToShow)
+            .frame(height: CGFloat(height))
             
-        }
-        .onChange(of: daysToShow) {
-            chartData = HistoryChartData.mockData(daysToShow)
+            // Make top of graph slightly taller than the highest chart value
+            .chartYScale(domain: 0...Float(HistoryChartData.maxMinutesStudied(chartData))*1.5)
             
-        }
-        .chartXAxis {
-            if daysToShow <= 7 {
-                AxisMarks(values: chartData.map { $0.date }) { date in
+            // Add "h" to y-axis label values
+            .chartYAxis {
+                AxisMarks() { value in
+                    AxisGridLine()
                     AxisValueLabel {
-                        if let dateValue = date.as(Date.self) {
-                            Text(dateValue, format: .dateTime.weekday())
-                                .offset(x:-10)
+                        if let number = value.as(Double.self) {
+                            Text("\(Int(number))h")
+                            
                         }
                     }
                 }
-            } else if daysToShow <= 31 {
-                AxisMarks(values: chartData.indices.filter { index in
-                    index % 5 == 0 || index == (daysToShow - 1)
-                    
-                }.map { chartData[$0].date }) { date in
-                    AxisTick()
-                    
-                    AxisValueLabel(format: .dateTime.month(.abbreviated).day())
-                    
-                }
-                
-            } else {
-                AxisMarks(values: chartData.indices.filter { index in
-                    Calendar.current.component(.day, from: chartData[index].date) == 1 || index == (daysToShow - 1)
-                    
-                }.map { chartData[$0].date }) { date in
-                    AxisTick()
-                    
-                    AxisValueLabel(format: .dateTime.month())
-                    
-                }
-                
             }
-        }
-        .chartYAxis {
-            AxisMarks() { value in
-                AxisValueLabel {
-                    if let number = value.as(Double.self) {
-                        Text("\(Int(number))h")
-                        
+            
+            // Adjust unit of x-axis labels
+            .chartXAxis {
+                if daysToShow <= 7 {
+                    AxisMarks() { value in
+                        AxisGridLine()
+                        AxisValueLabel (
+                            format: .dateTime.weekday()
+                        )
+                    }
+                } else if daysToShow <= 31 {
+                    AxisMarks() { value in
+                        AxisGridLine()
+                        AxisValueLabel (
+                            format: .dateTime.month(.abbreviated).day()
+                        )
+                    }
+                } else {
+                    AxisMarks() { value in
+                        AxisGridLine()
+                        AxisValueLabel (
+                            format: .dateTime.month(.abbreviated)
+                        )
                     }
                 }
             }
         }
-        .onAppear {
-            averageStudyTime = chartData.isEmpty ? 0.0 : Double(chartData.map { $0.minutesStudied }.reduce(0, +) / chartData.count)
-            
-        }
-        .onChange(of: daysToShow) {
-            averageStudyTime = chartData.isEmpty ? 0.0 : Double(chartData.map { $0.minutesStudied }.reduce(0, +) / chartData.count)
-            
-        }
+        .padding()
     }
 }
 
 #Preview {
-    @Previewable @State var daysToShow: Int = 7
+    @Previewable @State var daysToShow: Int = 7 // change to see different graph
     @Previewable @State var averageStudyTime: Double = 0
     
-    let timer = Timer.publish(every: 5, on: .main, in: .common).autoconnect()
-    
     ChartView(daysToShow: $daysToShow, averageStudyTime: $averageStudyTime)
-        .onReceive(timer) { _ in
-            daysToShow = Int.random(in: 5 ... 7)
-            
-        }
 }
