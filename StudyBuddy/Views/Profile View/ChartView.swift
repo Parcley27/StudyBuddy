@@ -8,8 +8,8 @@
 import SwiftUI
 import Charts
 
-func minutesToHoursStudied(_ data: HistoryData) -> (Int) {
-    return (data.minutesStudied)/60
+func minutesToHoursStudied(_ data: HistoryData) -> (Float) {
+    return (Float)(data.minutesStudied)/60.0
 }
 
 struct ChartView: View {
