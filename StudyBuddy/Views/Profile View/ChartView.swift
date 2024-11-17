@@ -24,7 +24,7 @@ struct ChartView: View {
     
     var body: some View {
         // Get properly formatted data
-        let chartData: [HistoryData] = HistoryData.formatData(daysToShow)
+        let chartData: [HistoryData] = HistoryData.formatData(data: chartData, length: daysToShow)
         
         // Color gradient
         let gradient = LinearGradient(
@@ -130,7 +130,7 @@ struct ChartView: View {
 }
 
 #Preview {
-    @Previewable @State var daysToShow: Int = 7
+    @Previewable @State var daysToShow: Int = 365
     @Previewable @State var averageStudyTime: Double = 0
     
     @Previewable @State var chartData: [HistoryData] = ProfileData.mock.historyData

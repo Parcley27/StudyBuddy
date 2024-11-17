@@ -14,9 +14,9 @@ struct HistoryData: Identifiable {
     
     let id = UUID()
     
-    static func formatData(_ length: Int) -> [HistoryData] {
+    static func formatData(data: [HistoryData], length: Int) -> [HistoryData] {
         // Take only last year of data (sourced from profile)
-        let newData: [HistoryData] = Array(ProfileData.mock.historyData.prefix(365))
+        let newData: [HistoryData] = Array(data.prefix(365))
         
         // If length is small enough, that portion of the data is OK
         if length <= 31 {
@@ -56,7 +56,7 @@ func summarizeData(data: [HistoryData]) -> [HistoryData] {
             continue
         }
 
-        // Calculate average of hoursStudied for the month
+        // Calculate average of minutesStudied for the month
         let totalHours = entries.reduce(0) { $0 + $1.minutesStudied }
         let averageHours = totalHours / entries.count
 
