@@ -286,6 +286,7 @@ struct ProfileView: View {
                                     daysToShow: $chartDayRange,
                                     averageStudyTime: $averageStudyTime
                                 )
+                                .padding(.top,1)
                             }
                         }
                         .overlay(
