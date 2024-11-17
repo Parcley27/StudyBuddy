@@ -350,7 +350,7 @@ struct ProfileView: View {
 }
 
 #Preview {
-    @Previewable @State var profileData: ProfileData = ProfileData.profile
+    @Previewable @State var profileData: ProfileData = ProfileData.mock
     
     ProfileView(profileData: $profileData)
     

@@ -57,7 +57,7 @@ struct HistoryData: Identifiable {
     
     static func formatData(_ length: Int) -> [HistoryData] {
         // Take only last year of data (sourced from profile)
-        let newData: [HistoryData] = Array(ProfileData.profile.historyData.prefix(365))
+        let newData: [HistoryData] = Array(ProfileData.mock.historyData.prefix(365))
         
         // If length is small enough, that portion of the data is OK
         if length <= 31 {

@@ -24,7 +24,7 @@ struct GreenView: View {
 struct ContentView: View {
     @State var selectedTab: String = "home"
     
-    @State var userProfileData: ProfileData = ProfileData.profile
+    @State var userProfileData: ProfileData = ProfileData.mock
     
     var body: some View {
         TabView(selection: $selectedTab) {

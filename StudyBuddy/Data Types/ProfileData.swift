@@ -24,7 +24,7 @@ struct ProfileData {
     
     var historyData: [HistoryData]
     
-    static let profile: ProfileData = {
+    static let mock: ProfileData = {
         let mockName: String = "Pierce Oxley"
         let mockUsername: String = "greenpowderranger"
         

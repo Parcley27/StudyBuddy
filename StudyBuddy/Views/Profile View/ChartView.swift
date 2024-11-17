@@ -137,7 +137,7 @@ struct ChartView: View {
     @Previewable @State var daysToShow: Int = 7
     @Previewable @State var averageStudyTime: Double = 0
     
-    @Previewable @State var chartData: [HistoryData] = ProfileData.profile.historyData
+    @Previewable @State var chartData: [HistoryData] = ProfileData.mock.historyData
     
     ChartView(daysToShow: $daysToShow, averageStudyTime: $averageStudyTime, chartData: $chartData)
 }
