@@ -15,7 +15,7 @@ func minutesToHoursStudied(_ data: HistoryData) -> (Float) {
 struct ChartView: View {
     // set height and graph colors for gradient
     var height: Int = 250
-    var colors = [Color("E39FF6"), Color("710193"), Color.purple]
+    var colors = [Color.purpleSecondary, Color.purplePrimary]
     
     @Binding var daysToShow: Int
     @Binding var averageStudyTime: Double
@@ -29,11 +29,7 @@ struct ChartView: View {
         // Color gradient
         let gradient = LinearGradient(
             gradient: Gradient (
-                colors: [
-                    colors[0],
-                    colors[1],
-                    colors[2]
-                ]
+                colors: colors
             ),
             startPoint: .leading,
             endPoint: .bottom

@@ -7,13 +7,35 @@
 
 import Foundation
 
-extension Date {
-    static func from(year: Int, month: Int, day: Int) -> Date {
-        let components = DateComponents(year: year, month: month, day: day)
-        return Calendar.current.date(from: components)!
+struct HistoryData: Identifiable {
+    let date: Date
+    
+    let minutesStudied: Int
+    
+    let id = UUID()
+    
+    static func formatData(_ length: Int) -> [HistoryData] {
+        // Take only last year of data (sourced from profile)
+        let newData: [HistoryData] = Array(ProfileData.mock.historyData.prefix(365))
+        
+        // If length is small enough, that portion of the data is OK
+        if length <= 31 {
+            return newData.suffix(length)
+        } else {
+            // return a "summarized" set of data if there are too many days to individually plot (Takes averages of groups of data)
+            let summarizedData = summarizeData(data: newData)
+            
+            return summarizedData
+            
+        }
     }
+            
+    static func maxMinutesStudied(_ data: [HistoryData]) -> (Int) {
+        return (data.max(by: { $0.minutesStudied < $1.minutesStudied })?.minutesStudied ?? 0)
+        
+    }
+    
 }
-
 
 func summarizeData(data: [HistoryData]) -> [HistoryData] {
     var monthlyData: [Int: [HistoryData]] = [:] // group into months
@@ -46,32 +68,4 @@ func summarizeData(data: [HistoryData]) -> [HistoryData] {
     }
 
     return averagedData
-}
-
-struct HistoryData: Identifiable {
-    let date: Date
-    
-    let minutesStudied: Int
-    
-    let id = UUID()
-    
-    static func formatData(_ length: Int) -> [HistoryData] {
-        // Take only last year of data (sourced from profile)
-        let newData: [HistoryData] = Array(ProfileData.mock.historyData.prefix(365))
-        
-        // If length is small enough, that portion of the data is OK
-        if length <= 31 {
-            return newData.suffix(length)
-        } else {
-            // return a "summarized" set of data if there are too many days to individually plot (Takes averages of groups of data)
-            let summarizedData = summarizeData(data: newData)
-            
-            return summarizedData
-        }
-    }
-            
-    static func maxMinutesStudied(_ data: [HistoryData]) -> (Int) {
-        return (data.max(by: { $0.minutesStudied < $1.minutesStudied })?.minutesStudied ?? 0)
-    }
-    
 }
