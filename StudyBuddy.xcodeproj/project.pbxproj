@@ -129,6 +129,7 @@
 				"Home View/TimeDialView.swift",
 				"Profile View/Accessories/BlurEffectView.swift",
 				"Profile View/Accessories/CloseIconView.swift",
+				"Profile View/Accessories/ProgressView.swift",
 				"Profile View/Accessories/SettingsIconView.swift",
 				"Profile View/Accessories/ShareIconView.swift",
 				"Profile View/Accessories/StatsView.swift",

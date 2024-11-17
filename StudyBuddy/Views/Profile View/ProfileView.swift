@@ -137,18 +137,9 @@ struct ProfileView: View {
 
                                     Spacer()
 
-                                    VStack(alignment: .leading, spacing: 2) {
-                                        Text("Something")
-                                            .font(.custom("Inter24pt-SemiBold", size: 16))
-                                            .foregroundColor(.primary)
-                                        
-                                        Text("Something")
-                                            .font(.custom("Inter24pt-Regular", size: 13))
-                                            .foregroundColor(.secondary)
-                                        
-                                    }
-                                    .padding(.trailing, 30) // Padding from the right edge of the rectangle
-                                    .frame(maxHeight: .infinity, alignment: .center)
+                                    ProgressView(time: 600.0, maxTime: 1000.0, maxWidth: 172)
+                                        .padding(.trailing, 30) // Padding from the right edge of the rectangle
+                                        .frame(maxHeight: .infinity, alignment: .center)
                                     
                                 }
                             )
