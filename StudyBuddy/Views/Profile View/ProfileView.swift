@@ -22,6 +22,12 @@ struct ProfileView: View {
     
     @State var averageStudyTime: Double = HistoryData.averageMinutesStudied(data: ProfileData.mock.historyData, range: 7)
     
+    func updateChartRange(to range: String, days: Int) {
+        chartRange = range
+        chartDayRange = days
+        averageStudyTime = HistoryData.averageMinutesStudied(data: profileData.historyData, range: days)
+    }
+    
     var body: some View {
         NavigationStack {
             ZStack {
@@ -224,9 +230,7 @@ struct ProfileView: View {
                                             
                                         }
                                         .onTapGesture {
-                                            chartRange = "week"
-                                            chartDayRange = 7
-                                            averageStudyTime = HistoryData.averageMinutesStudied(data: profileData.historyData, range: chartDayRange)
+                                            updateChartRange(to: "week", days: 7)
                                         }
                                         
                                         ZStack {
@@ -241,26 +245,22 @@ struct ProfileView: View {
                                             
                                         }
                                         .onTapGesture {
-                                            chartRange = "month"
-                                            chartDayRange = 30
-                                            averageStudyTime = HistoryData.averageMinutesStudied(data: profileData.historyData, range: chartDayRange)
+                                            updateChartRange(to: "month", days: 30)
                                         }
                                         
                                         ZStack {
                                             Capsule()
-                                                .fill(chartRange == "all" ? Color.white : Color.clear)
-                                                .strokeBorder(chartRange == "all" ? Color.whitePrimary : Color.backgroundSecondary, lineWidth: 1)
+                                                .fill(chartRange == "year" ? Color.white : Color.clear)
+                                                .strokeBorder(chartRange == "year" ? Color.whitePrimary : Color.backgroundSecondary, lineWidth: 1)
                                                 .frame(width: 85, height: 30)
                                             
                                             Text("This Year")
                                                 .font(.custom("Inter24pt-Medium", size: 13))
-                                                .foregroundColor(chartRange == "all" ? Color.black : Color.whitePrimary)
+                                                .foregroundColor(chartRange == "year" ? Color.black : Color.whitePrimary)
                                             
                                         }
                                         .onTapGesture {
-                                            chartRange = "all"
-                                            chartDayRange = 365
-                                            averageStudyTime = HistoryData.averageMinutesStudied(data: profileData.historyData, range: chartDayRange)
+                                            updateChartRange(to: "year", days: 365)
                                         }
                                     }
                                     
