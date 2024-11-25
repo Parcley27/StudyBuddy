@@ -35,6 +35,12 @@ struct HistoryData: Identifiable {
         
     }
     
+    static func averageMinutesStudied(data: [HistoryData], range: Int) -> Double {
+        let newData = Array(data.prefix(range))
+        guard !newData.isEmpty else { return 0 } // Avoid division by zero
+        let total = newData.reduce(0) { $0 + $1.minutesStudied }
+        return Double(total) / Double(range)
+    }
 }
 
 func summarizeData(data: [HistoryData]) -> [HistoryData] {

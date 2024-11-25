@@ -20,7 +20,7 @@ struct ProfileView: View {
     @State private var chartRange: String = "week"
     @State private var chartDayRange: Int = 7
     
-    @State var averageStudyTime: Double = 0
+    @State var averageStudyTime: Double = HistoryData.averageMinutesStudied(data: ProfileData.mock.historyData, range: 7)
     
     var body: some View {
         NavigationStack {
@@ -226,7 +226,7 @@ struct ProfileView: View {
                                         .onTapGesture {
                                             chartRange = "week"
                                             chartDayRange = 7
-                                            
+                                            averageStudyTime = HistoryData.averageMinutesStudied(data: profileData.historyData, range: chartDayRange)
                                         }
                                         
                                         ZStack {
@@ -243,7 +243,7 @@ struct ProfileView: View {
                                         .onTapGesture {
                                             chartRange = "month"
                                             chartDayRange = 30
-                                            
+                                            averageStudyTime = HistoryData.averageMinutesStudied(data: profileData.historyData, range: chartDayRange)
                                         }
                                         
                                         ZStack {
@@ -260,7 +260,7 @@ struct ProfileView: View {
                                         .onTapGesture {
                                             chartRange = "all"
                                             chartDayRange = 365
-                                            
+                                            averageStudyTime = HistoryData.averageMinutesStudied(data: profileData.historyData, range: chartDayRange)
                                         }
                                     }
                                     
@@ -268,7 +268,7 @@ struct ProfileView: View {
                                         let hours = Int(averageStudyTime / 60)
                                         let minutes = Int(averageStudyTime) % 60
                                         
-                                        Text("\(hours)\(hours == 1 ? "hr" : "hrs") \(minutes)min")
+                                        Text("\(hours)\(hours == 1 ? " hr," : " hrs,") \(minutes) min")
                                             .font(.custom("Inter24pt-SemiBold", size: 20))
                                             .foregroundStyle(Color.whitePrimary)
                                         
